@@ -1,0 +1,11 @@
+# Système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
+
+# Rien à construire ici : pas de node_modules, pas de dossier de build.

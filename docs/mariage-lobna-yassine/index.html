@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lobna &amp; Yassine — Notre mariage</title>
+<meta name="description" content="Toutes les informations pratiques et la confirmation de présence pour le mariage de Lobna et Yassine.">
+<!-- Page privée : envoyée par lien aux invités, elle n'a pas vocation à être trouvée dans Google. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#faf6f1">
+
+<!-- Aperçu lors du partage du lien (WhatsApp, SMS, réseaux) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lobna &amp; Yassine — Notre mariage">
+<meta property="og:description" content="Nous serions heureux de vous compter parmi nous. Confirmez votre présence ici.">
+<meta property="og:image" content="images/couple.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="saut-contenu" href="#contenu">Aller au contenu</a>
+
+<!-- =====================================================================
+     1. ACCUEIL
+     ===================================================================== -->
+<header class="hero" id="accueil">
+  <div class="hero__fond" aria-hidden="true">
+    <img id="hero-photo" alt="" decoding="async" fetchpriority="high" hidden>
+  </div>
+  <div class="hero__voile" aria-hidden="true"></div>
+
+  <div class="hero__contenu">
+    <p class="hero__sur-titre">Nous nous marions</p>
+    <h1 class="hero__noms">
+      <span id="prenom-a">Lobna</span>
+      <span class="hero__esperluette" aria-hidden="true">&amp;</span>
+      <span id="prenom-b">Yassine</span>
+    </h1>
+    <p class="hero__date" id="hero-date"></p>
+
+    <div class="compte-a-rebours" id="compte-a-rebours" hidden>
+      <div class="cr__bloc"><span class="cr__nombre" id="cr-jours">–</span><span class="cr__label">jours</span></div>
+      <div class="cr__bloc"><span class="cr__nombre" id="cr-heures">–</span><span class="cr__label">heures</span></div>
+      <div class="cr__bloc"><span class="cr__nombre" id="cr-minutes">–</span><span class="cr__label">minutes</span></div>
+      <div class="cr__bloc"><span class="cr__nombre" id="cr-secondes">–</span><span class="cr__label">secondes</span></div>
+    </div>
+    <p class="compte-a-rebours__message" id="cr-message" hidden></p>
+
+    <a class="bouton bouton--clair" href="#rsvp">Confirmer ma présence</a>
+  </div>
+
+  <a class="hero__fleche" href="#contenu" aria-label="Voir la suite"><span aria-hidden="true"></span></a>
+</header>
+
+<main id="contenu">
+
+  <!-- ===================================================================
+       2. NOTRE HISTOIRE
+       =================================================================== -->
+  <section class="section section--etroite anim" id="histoire" hidden>
+    <h2 class="titre-section" id="histoire-titre">Notre histoire</h2>
+    <div class="ornement" aria-hidden="true"></div>
+    <p class="texte-doux" id="histoire-texte"></p>
+  </section>
+
+  <!-- ===================================================================
+       3. DATE & LIEU
+       =================================================================== -->
+  <section class="section anim" id="lieu">
+    <h2 class="titre-section">Date &amp; lieu</h2>
+    <div class="ornement" aria-hidden="true"></div>
+
+    <div class="lieu__resume">
+      <p class="lieu__date" id="lieu-date"></p>
+      <p class="lieu__nom" id="lieu-nom"></p>
+      <p class="lieu__adresse" id="lieu-adresse"></p>
+      <p class="lieu__heure" id="lieu-heure"></p>
+      <a class="bouton" id="lieu-bouton-maps" href="#" target="_blank" rel="noopener" hidden>Ouvrir dans Maps</a>
+    </div>
+
+    <div class="carte" id="carte" hidden>
+      <iframe id="carte-iframe" title="Carte du lieu de réception" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+
+    <div class="grille-infos" id="lieu-pratique">
+      <article class="carte-info" id="bloc-parking" hidden>
+        <h3>Parking</h3><p id="lieu-parking"></p>
+      </article>
+      <article class="carte-info" id="bloc-acces" hidden>
+        <h3>Accès</h3><p id="lieu-acces"></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       4. DÉROULEMENT DE LA JOURNÉE
+       =================================================================== -->
+  <section class="section anim" id="programme" hidden>
+    <h2 class="titre-section">Le déroulement de la journée</h2>
+    <div class="ornement" aria-hidden="true"></div>
+    <ol class="timeline" id="timeline"></ol>
+  </section>
+
+  <!-- ===================================================================
+       5. GALERIE
+       =================================================================== -->
+  <section class="section anim" id="galerie" hidden>
+    <h2 class="titre-section">Quelques souvenirs</h2>
+    <div class="ornement" aria-hidden="true"></div>
+    <div class="galerie" id="galerie-grille"></div>
+  </section>
+
+  <!-- ===================================================================
+       6. RSVP
+       =================================================================== -->
+  <section class="section section--etroite section--accent anim" id="rsvp">
+    <h2 class="titre-section">Serez-vous des nôtres ?</h2>
+    <div class="ornement" aria-hidden="true"></div>
+    <p class="texte-doux" id="rsvp-limite"></p>
+
+    <form class="formulaire" id="form-rsvp" novalidate>
+      <!-- Piège à robots : invisible et jamais rempli par un humain. -->
+      <div class="honeypot" aria-hidden="true">
+        <label for="site">Ne pas remplir</label>
+        <input type="text" id="site" name="site" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="champ">
+        <label for="nom">Nom et prénom <span class="requis" aria-hidden="true">*</span></label>
+        <input type="text" id="nom" name="nom" autocomplete="name" required>
+      </div>
+
+      <fieldset class="champ champ--choix">
+        <legend>Serez-vous présent·e ? <span class="requis" aria-hidden="true">*</span></legend>
+        <div class="choix">
+          <input type="radio" id="presence-oui" name="presence" value="Oui" required>
+          <label for="presence-oui">Oui, avec joie</label>
+        </div>
+        <div class="choix">
+          <input type="radio" id="presence-non" name="presence" value="Non">
+          <label for="presence-non">Non, malheureusement</label>
+        </div>
+      </fieldset>
+
+      <div class="champ" id="champ-personnes" hidden>
+        <label for="personnes">Nombre de personnes (vous compris·e)</label>
+        <input type="number" id="personnes" name="personnes" value="1" min="1" max="12" inputmode="numeric">
+      </div>
+
+      <div class="champ" id="champ-regime" hidden>
+        <label for="regime">Préférences repas ou allergies</label>
+        <textarea id="regime" name="regime" rows="2"
+                  placeholder="Végétarien, sans gluten, allergie aux fruits à coque…"></textarea>
+      </div>
+
+      <div class="champ">
+        <label for="message">Un mot pour les mariés <span class="facultatif">(facultatif)</span></label>
+        <textarea id="message" name="message" rows="3"></textarea>
+      </div>
+
+      <button class="bouton bouton--plein" type="submit" id="rsvp-envoyer">Confirmer ma présence</button>
+
+      <p class="form-etat" id="form-etat" role="status" aria-live="polite" hidden></p>
+    </form>
+  </section>
+
+  <!-- ===================================================================
+       7. INFOS PRATIQUES
+       =================================================================== -->
+  <section class="section anim" id="infos">
+    <h2 class="titre-section">Bon à savoir</h2>
+    <div class="ornement" aria-hidden="true"></div>
+    <div class="grille-infos" id="grille-infos"></div>
+    <p class="contacts" id="contacts"></p>
+  </section>
+
+</main>
+
+<footer class="pied">
+  <p class="pied__noms"><span id="pied-a">Lobna</span> &amp; <span id="pied-b">Yassine</span></p>
+  <p class="pied__date" id="pied-date"></p>
+</footer>
+
+<!-- Visionneuse plein écran de la galerie -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo en grand" hidden>
+  <button class="lightbox__fermer" id="lightbox-fermer" aria-label="Fermer">&times;</button>
+  <button class="lightbox__nav lightbox__nav--prec" id="lightbox-prec" aria-label="Photo précédente">&#8249;</button>
+  <img class="lightbox__image" id="lightbox-image" alt="">
+  <button class="lightbox__nav lightbox__nav--suiv" id="lightbox-suiv" aria-label="Photo suivante">&#8250;</button>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

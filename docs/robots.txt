@@ -1,0 +1,4 @@
+# Page privée : le lien est envoyé directement aux invités.
+# Elle n'a pas vocation à apparaître dans les résultats de recherche.
+User-agent: *
+Disallow: /

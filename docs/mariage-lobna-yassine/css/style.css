@@ -1,0 +1,474 @@
+/* ==========================================================================
+   Lobna & Yassine — feuille de style unique
+   Écrite mobile-first : les règles de base visent le téléphone, les
+   @media (min-width) élargissent ensuite pour tablette et ordinateur.
+   Les couleurs viennent de config.js (js/main.js les injecte ici au
+   chargement) ; les valeurs ci-dessous servent de repli.
+   ========================================================================== */
+
+:root {
+  --creme: #faf6f1;
+  --blush: #e3c4bd;
+  --dore:  #b8935a;
+  --encre: #3b3230;
+  --sauge: #9aa892;
+
+  --blanc: #fffdfb;
+  --encre-doux: #6d615d;
+  --ombre: 0 2px 18px rgba(59, 50, 48, .07);
+
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --sans: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --marge: 1.5rem;
+  --largeur: 68rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Un display: flex/grid posé par une classe l'emporte sur l'attribut hidden du
+   navigateur : sans cette règle, la visionneuse et le compte à rebours
+   restent visibles alors que le JS les a masqués. À garder en tête pour tout
+   nouvel élément masqué par défaut. */
+[hidden] { display: none !important; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--creme);
+  color: var(--encre);
+  font-family: var(--sans);
+  font-size: 1rem;          /* 16px : en dessous, iOS zoome sur les champs */
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;       /* aucune barre horizontale, jamais */
+}
+
+img { max-width: 100%; display: block; }
+
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.2; margin: 0; }
+
+a { color: var(--dore); }
+
+/* Lien d'évitement, visible seulement au clavier */
+.saut-contenu {
+  position: absolute; left: -9999px;
+  background: var(--encre); color: var(--creme);
+  padding: .75rem 1rem; z-index: 100; border-radius: 0 0 .5rem 0;
+}
+.saut-contenu:focus { left: 0; top: 0; }
+
+/* Contour de focus visible partout : indispensable à la navigation clavier */
+:focus-visible { outline: 2px solid var(--dore); outline-offset: 3px; }
+
+/* ==========================================================================
+   1. ACCUEIL
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  min-height: 100svh;       /* svh : tient compte de la barre d'URL mobile */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem var(--marge) 5rem;
+  overflow: hidden;
+  color: var(--blanc);
+}
+
+/* Dégradé de repli : visible tant qu'aucune photo n'est déposée */
+.hero__fond {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(120% 90% at 30% 10%, #cbb3a6 0%, transparent 60%),
+    linear-gradient(160deg, #8d7a6e 0%, #5c4f4a 55%, #3b3230 100%);
+}
+.hero__fond img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Voile sombre : sans lui, un texte clair sur photo devient illisible */
+.hero__voile {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(38,32,30,.45) 0%, rgba(38,32,30,.30) 40%, rgba(38,32,30,.62) 100%);
+}
+
+.hero__contenu { position: relative; max-width: 34rem; }
+
+.hero__sur-titre {
+  margin: 0 0 1rem;
+  font-size: .75rem; letter-spacing: .32em; text-transform: uppercase;
+  font-weight: 300; opacity: .9;
+}
+
+.hero__noms {
+  font-size: clamp(2.75rem, 13vw, 5.5rem);
+  margin: 0;
+  display: flex; flex-direction: column; align-items: center;
+}
+.hero__esperluette {
+  font-style: italic; color: var(--blush);
+  font-size: .55em; line-height: 1; margin: .1em 0;
+}
+
+.hero__date {
+  margin: 1.25rem 0 0;
+  font-size: .95rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 300;
+}
+
+.compte-a-rebours {
+  display: flex; justify-content: center; gap: .5rem;
+  margin: 2.25rem 0 2rem;
+}
+.cr__bloc {
+  flex: 1 1 0; max-width: 5.5rem;
+  padding: .75rem .25rem;
+  background: rgba(255,253,251,.13);
+  border: 1px solid rgba(255,253,251,.28);
+  border-radius: .5rem;
+  backdrop-filter: blur(3px);
+}
+.cr__nombre {
+  display: block; font-family: var(--serif);
+  font-size: clamp(1.4rem, 6vw, 2rem); line-height: 1.1;
+  font-variant-numeric: tabular-nums;   /* les chiffres ne dansent pas */
+}
+.cr__label {
+  display: block; font-size: .6rem; letter-spacing: .16em;
+  text-transform: uppercase; opacity: .85; margin-top: .3rem;
+}
+.compte-a-rebours__message {
+  font-family: var(--serif); font-size: 1.5rem; font-style: italic;
+  margin: 2.25rem 0 2rem;
+}
+
+.hero__fleche {
+  position: absolute; bottom: 1.75rem; left: 50%; transform: translateX(-50%);
+  width: 44px; height: 44px;               /* cible tactile confortable */
+  display: flex; align-items: center; justify-content: center;
+}
+.hero__fleche span {
+  width: 12px; height: 12px;
+  border-right: 1.5px solid var(--blanc); border-bottom: 1.5px solid var(--blanc);
+  transform: rotate(45deg);
+  animation: flottement 2.4s ease-in-out infinite;
+}
+@keyframes flottement {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); opacity: .6; }
+  50%      { transform: rotate(45deg) translate(3px, 3px); opacity: 1; }
+}
+
+/* ==========================================================================
+   2. STRUCTURE COMMUNE DES SECTIONS
+   ========================================================================== */
+
+.section {
+  max-width: var(--largeur);
+  margin: 0 auto;
+  padding: 4rem var(--marge);
+  text-align: center;
+}
+.section--etroite { max-width: 42rem; }
+.section--accent { background: var(--blanc); max-width: none; }
+.section--accent > * { max-width: 42rem; margin-left: auto; margin-right: auto; }
+
+.titre-section {
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
+  margin: 0;
+}
+
+/* Petit ornement doré sous chaque titre */
+.ornement {
+  width: 4.5rem; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--dore), transparent);
+  margin: 1.25rem auto 2rem;
+  position: relative;
+}
+.ornement::after {
+  content: "";
+  position: absolute; top: -2px; left: 50%; transform: translateX(-50%) rotate(45deg);
+  width: 5px; height: 5px; background: var(--dore);
+}
+
+.texte-doux {
+  color: var(--encre-doux);
+  font-size: 1.05rem;
+  margin: 0 auto;
+  max-width: 38rem;
+}
+
+/* ==========================================================================
+   3. DATE & LIEU
+   ========================================================================== */
+
+.lieu__date {
+  font-family: var(--serif); font-size: 1.5rem; font-style: italic;
+  margin: 0 0 1.5rem; color: var(--dore);
+}
+.lieu__nom { font-family: var(--serif); font-size: 1.35rem; margin: 0 0 .35rem; }
+.lieu__adresse { margin: 0; color: var(--encre-doux); }
+.lieu__heure { margin: .35rem 0 0; color: var(--encre-doux); font-size: .95rem; }
+
+.carte {
+  margin: 2.5rem auto 0;
+  border-radius: .75rem; overflow: hidden;
+  box-shadow: var(--ombre);
+  line-height: 0;
+}
+.carte iframe { width: 100%; height: 20rem; border: 0; }
+
+.grille-infos {
+  display: grid; grid-template-columns: 1fr; gap: 1rem;
+  margin-top: 2.5rem; text-align: left;
+}
+/* Le lieu n'a que deux encarts : leur imposer la grille à quatre colonnes
+   des infos pratiques les réduirait à deux colonnes maigres, calées à gauche. */
+#lieu-pratique { max-width: 46rem; margin-inline: auto; }
+
+.carte-info {
+  background: var(--blanc);
+  border: 1px solid rgba(184,147,90,.16);
+  border-radius: .75rem;
+  padding: 1.35rem 1.5rem;
+}
+.carte-info h3 {
+  font-size: 1.1rem; margin: 0 0 .4rem; color: var(--dore);
+}
+.carte-info p { margin: 0; color: var(--encre-doux); font-size: .95rem; }
+
+/* ==========================================================================
+   4. TIMELINE
+   ========================================================================== */
+
+.timeline {
+  list-style: none;
+  margin: 0 auto; padding: 0;
+  max-width: 34rem; text-align: left;
+  position: relative;
+}
+/* Le trait vertical qui relie les jalons */
+.timeline::before {
+  content: "";
+  position: absolute; top: .6rem; bottom: .6rem; left: 4.5rem;
+  width: 1px; background: linear-gradient(180deg, transparent, var(--blush) 12%, var(--blush) 88%, transparent);
+}
+.jalon {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0 1.75rem;
+  padding-bottom: 2.25rem;
+}
+.jalon:last-child { padding-bottom: 0; }
+.jalon__heure {
+  font-family: var(--serif); font-size: 1.05rem; color: var(--dore);
+  text-align: right; padding-top: .1rem;
+  font-variant-numeric: tabular-nums;
+}
+/* La pastille posée sur le trait */
+.jalon::before {
+  content: "";
+  position: absolute; left: 4.5rem; top: .55rem;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--creme); border: 1.5px solid var(--dore);
+  transform: translateX(-50%);
+}
+.jalon__corps h3 { font-size: 1.15rem; margin: 0 0 .2rem; }
+.jalon__corps p { margin: 0; color: var(--encre-doux); font-size: .95rem; }
+
+/* ==========================================================================
+   5. GALERIE
+   ========================================================================== */
+
+.galerie {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .6rem;
+}
+.galerie__vignette {
+  margin: 0; padding: 0; border: 0;
+  aspect-ratio: 1 / 1;
+  overflow: hidden; border-radius: .5rem;
+  background: linear-gradient(140deg, var(--blush), var(--sauge));
+  cursor: zoom-in;
+}
+.galerie__vignette img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .5s ease;
+}
+.galerie__vignette:hover img,
+.galerie__vignette:focus-visible img { transform: scale(1.05); }
+
+.lightbox {
+  position: fixed; inset: 0; z-index: 50;
+  background: rgba(30, 25, 24, .94);
+  display: flex; align-items: center; justify-content: center;
+  padding: 3.5rem 1rem;
+}
+.lightbox__image {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain; border-radius: .25rem;
+}
+.lightbox__fermer, .lightbox__nav {
+  position: absolute;
+  background: none; border: 0; color: var(--blanc);
+  cursor: pointer; line-height: 1;
+  min-width: 44px; min-height: 44px;
+}
+.lightbox__fermer { top: .5rem; right: .75rem; font-size: 2.25rem; }
+.lightbox__nav { top: 50%; transform: translateY(-50%); font-size: 3rem; padding: 0 .5rem; }
+.lightbox__nav--prec { left: .25rem; }
+.lightbox__nav--suiv { right: .25rem; }
+
+/* ==========================================================================
+   6. FORMULAIRE RSVP
+   ========================================================================== */
+
+.formulaire { margin-top: 2rem; text-align: left; }
+
+.champ { margin-bottom: 1.35rem; }
+.champ label, .champ legend {
+  display: block; margin-bottom: .4rem;
+  font-size: .82rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--encre-doux); font-weight: 700;
+}
+.requis { color: var(--dore); }
+.facultatif { text-transform: none; letter-spacing: 0; font-weight: 400; opacity: .75; }
+
+.champ input[type="text"],
+.champ input[type="number"],
+.champ textarea {
+  width: 100%;
+  padding: .8rem .9rem;
+  font-family: inherit;
+  font-size: 1rem;                 /* 16px : empêche le zoom iOS */
+  color: var(--encre);
+  background: var(--creme);
+  border: 1px solid rgba(59,50,48,.18);
+  border-radius: .4rem;
+  transition: border-color .2s;
+}
+.champ input:focus, .champ textarea:focus { border-color: var(--dore); }
+.champ textarea { resize: vertical; }
+
+.champ--choix { border: 0; margin: 0 0 1.35rem; padding: 0; }
+.choix { display: flex; align-items: center; gap: .6rem; margin-bottom: .4rem; }
+.choix input { width: 1.1rem; height: 1.1rem; accent-color: var(--dore); flex: none; }
+.choix label {
+  margin: 0; text-transform: none; letter-spacing: 0;
+  font-weight: 400; font-size: 1rem; color: var(--encre);
+  padding: .35rem 0;               /* agrandit la zone cliquable */
+}
+
+.champ--erreur input, .champ--erreur textarea { border-color: #b4524a; }
+
+.honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.form-etat {
+  margin: 1.25rem 0 0; padding: .9rem 1rem;
+  border-radius: .4rem; font-size: .95rem;
+}
+.form-etat--ok    { background: rgba(154,168,146,.18); border: 1px solid var(--sauge); }
+.form-etat--erreur{ background: rgba(180,82,74,.10);  border: 1px solid #b4524a; }
+
+/* ==========================================================================
+   7. BOUTONS, INFOS, PIED
+   ========================================================================== */
+
+.bouton {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: .85rem 2rem;
+  min-height: 44px;
+  font-family: var(--sans); font-size: .82rem;
+  letter-spacing: .18em; text-transform: uppercase; font-weight: 700;
+  text-decoration: none;
+  color: var(--encre);
+  border: 1px solid var(--dore);
+  border-radius: 2rem;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color .25s, color .25s;
+}
+.bouton:hover { background: var(--dore); color: var(--blanc); }
+.bouton--clair { color: var(--blanc); border-color: rgba(255,253,251,.7); }
+.bouton--clair:hover { background: var(--blanc); color: var(--encre); }
+.bouton--plein {
+  width: 100%; background: var(--dore); color: var(--blanc); border-color: var(--dore);
+}
+.bouton--plein:hover { background: var(--encre); border-color: var(--encre); }
+.bouton[disabled] { opacity: .55; cursor: progress; }
+
+.contacts { margin-top: 2rem; color: var(--encre-doux); font-size: .95rem; }
+.contacts a { margin: 0 .5rem; white-space: nowrap; }
+
+.pied {
+  background: var(--encre); color: var(--creme);
+  text-align: center; padding: 3rem var(--marge);
+}
+.pied__noms { font-family: var(--serif); font-size: 1.6rem; margin: 0; }
+.pied__date {
+  margin: .6rem 0 0; font-size: .75rem;
+  letter-spacing: .22em; text-transform: uppercase; opacity: .65;
+}
+
+/* ==========================================================================
+   8. APPARITION AU SCROLL
+   ========================================================================== */
+
+.anim { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s ease; }
+.anim--visible { opacity: 1; transform: none; }
+
+/* ==========================================================================
+   9. ÉLARGISSEMENT TABLETTE / ORDINATEUR
+   ========================================================================== */
+
+@media (min-width: 40rem) {
+  .section { padding: 5.5rem 2rem; }
+  .hero__noms { flex-direction: row; gap: 1.5rem; align-items: baseline; }
+  .hero__esperluette { font-size: .5em; margin: 0; }
+  .compte-a-rebours { gap: 1rem; }
+  .cr__bloc { padding: 1rem .5rem; }
+  .galerie { grid-template-columns: repeat(3, 1fr); gap: .8rem; }
+  .grille-infos { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  .carte iframe { height: 24rem; }
+  .bouton--plein { width: auto; min-width: 16rem; display: block; margin-inline: auto; }
+}
+
+@media (min-width: 64rem) {
+  .section { padding: 5.5rem 2rem; }
+  .grille-infos { grid-template-columns: repeat(4, 1fr); }
+  #lieu-pratique { grid-template-columns: repeat(2, 1fr); }
+  .carte iframe { height: 28rem; }
+}
+
+/* ==========================================================================
+   10. MOUVEMENT RÉDUIT
+   Pour qui a demandé moins d'animations dans son système : tout est visible
+   d'emblée, plus rien ne bouge. Le contenu prime sur l'effet.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .anim { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   11. IMPRESSION — certains invités impriment la page pour l'adresse
+   ========================================================================== */
+
+@media print {
+  .hero { min-height: auto; color: var(--encre); page-break-after: avoid; }
+  .hero__voile, .hero__fond, .hero__fleche, .compte-a-rebours,
+  .bouton, .carte, .galerie, #rsvp { display: none !important; }
+  .anim { opacity: 1; transform: none; }
+  body { background: #fff; }
+}
