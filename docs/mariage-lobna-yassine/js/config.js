@@ -57,8 +57,8 @@ window.MARIAGE_CONFIG = {
     // Vérifiez que la carte pointe au bon endroit ; sinon, remplacez cette
     // ligne par des coordonnées GPS relevées sur Google Maps (ex. "36.75, 10.22").
     mapsQuery: "Vienna Event House, Ben Arous, Tunisie",
-    parking: "[À COMPLÉTER] Parking sur place ?",
-    acces: "[À COMPLÉTER] Depuis le centre de Tunis : … / Depuis l'aéroport Tunis-Carthage : …"
+    parking: "Un parking est disponible sur place, au Vienna Event House.",
+    acces: "En voiture, l'accès se fait derrière la pharmacie centrale."
   },
 
   /* --- 5. DÉROULEMENT DE LA JOURNÉE ----------------------------------
