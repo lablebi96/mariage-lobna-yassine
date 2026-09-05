@@ -30,18 +30,19 @@ window.MARIAGE_CONFIG = {
      dateAffichee est le texte montré à l'écran. Laissez "" pour qu'il soit
      écrit automatiquement à partir de dateISO (ex. « samedi 12 juin 2027 »).
      -------------------------------------------------------------------- */
-  dateISO: "2027-06-12T15:00:00+02:00",           // [À COMPLÉTER]
-  dateAffichee: "",                                // auto si vide
+  dateISO: "2027-03-26T21:00:00+01:00",           // vendredi 26 mars 2027, 21h00
+  dateAffichee: "",                                // auto → « vendredi 26 mars 2027 »
 
   /* --- 3. NOTRE HISTOIRE (section optionnelle) ------------------------
      Mettre texte: "" pour supprimer complètement la section.
      -------------------------------------------------------------------- */
   histoire: {
     titre: "Notre histoire",
-    texte: "[À COMPLÉTER] Quelques lignes sur votre rencontre, ce qui vous " +
-           "lie, ou simplement le plaisir de réunir ceux que vous aimez. " +
-           "Deux ou trois phrases suffisent : les invités liront cette page " +
-           "sur leur téléphone."
+    texte: "Tout a commencé à Toulouse. Depuis 2019, nos chemins se sont " +
+           "croisés, éloignés, puis retrouvés — plusieurs fois. Assez de fois " +
+           "pour comprendre qu'ils n'étaient pas faits pour rester séparés. " +
+           "En août 2023, nous nous sommes fiancés. Le 26 mars 2027, nous " +
+           "aimerions vous avoir auprès de nous."
   },
 
   /* --- 4. DATE & LIEU -------------------------------------------------
@@ -50,22 +51,25 @@ window.MARIAGE_CONFIG = {
      ("36.8065, 10.1815"). Laisser "" masque la carte.
      -------------------------------------------------------------------- */
   lieu: {
-    nom: "[À COMPLÉTER] Nom du lieu de réception",
-    adresse: "[À COMPLÉTER] 12 rue Exemple, 75000 Ville",
-    heureArrivee: "[À COMPLÉTER] Accueil des invités à 15h00",
-    mapsQuery: "",                                 // [À COMPLÉTER]
-    parking: "[À COMPLÉTER] Parking gratuit sur place, 80 places.",
-    acces: "[À COMPLÉTER] À 25 min du centre-ville. Gare la plus proche : …"
+    nom: "Vienna Event House",
+    adresse: "Ben Arous, Tunis, Tunisie",
+    heureArrivee: "Accueil des invités à partir de 21h00",
+    // Vérifiez que la carte pointe au bon endroit ; sinon, remplacez cette
+    // ligne par des coordonnées GPS relevées sur Google Maps (ex. "36.75, 10.22").
+    mapsQuery: "Vienna Event House, Ben Arous, Tunisie",
+    parking: "[À COMPLÉTER] Parking sur place ?",
+    acces: "[À COMPLÉTER] Depuis le centre de Tunis : … / Depuis l'aéroport Tunis-Carthage : …"
   },
 
   /* --- 5. DÉROULEMENT DE LA JOURNÉE ----------------------------------
      Ajoutez ou supprimez des blocs { … } librement : la timeline s'adapte.
      -------------------------------------------------------------------- */
   programme: [
-    { heure: "15h00", titre: "Cérémonie",  texte: "[À COMPLÉTER] Merci d'arriver 15 minutes en avance." },
-    { heure: "16h30", titre: "Cocktail",   texte: "[À COMPLÉTER] Vin d'honneur et photos de groupe." },
-    { heure: "19h30", titre: "Dîner",      texte: "[À COMPLÉTER] Placement à table affiché à l'entrée." },
-    { heure: "22h00", titre: "Soirée",     texte: "[À COMPLÉTER] Ouverture du bal, puis dancefloor." }
+    // ⚠ HORAIRES À CONFIRMER — seul « 21h00 » nous a été communiqué.
+    { heure: "21h00", titre: "Accueil des invités", texte: "[À COMPLÉTER]" },
+    { heure: "22h00", titre: "Entrée des mariés",   texte: "[À COMPLÉTER]" },
+    { heure: "23h00", titre: "Dîner",               texte: "[À COMPLÉTER]" },
+    { heure: "00h30", titre: "Soirée",              texte: "[À COMPLÉTER] Ouverture du bal, puis dancefloor." }
   ],
 
   /* --- 6. GALERIE PHOTOS ----------------------------------------------
