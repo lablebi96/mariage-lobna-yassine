@@ -97,7 +97,7 @@ window.MARIAGE_CONFIG = {
     { heure: "Juste après", titre: "Sortie et photos",
       texte: "Nous libérons la salle pour le mariage suivant. Photos dehors, devant l'Hôtel de ville." },
     { heure: "Ensuite", titre: "Tous à table",
-      texte: "Un restaurant est réservé pour prolonger la journée ensemble. [À COMPLÉTER : nom et adresse du restaurant.] Signalez vos allergies dans le formulaire, nous transmettrons." }
+      texte: "Direction Paris : nous prolongeons la journée à L'Olivier d'Or, 111 rue de Montreuil, dans le 11e, à deux pas de la Nation. Signalez vos allergies dans le formulaire, nous transmettrons." }
   ],
 
   /* --- 6. GALERIE ------------------------------------------------------ */
@@ -138,7 +138,8 @@ window.MARIAGE_CONFIG = {
   infos: {
     dressCode: {
       titre: "Tenue",
-      texte: "[À COMPLÉTER] Élégant sans cérémonie. Évitez le blanc."
+      texte: "Rien d'imposé : ce que l'on met pour un mariage. Évitez " +
+             "simplement le blanc."
     },
     salle: {
       titre: "Dans la salle",
@@ -160,6 +161,16 @@ window.MARIAGE_CONFIG = {
              "d'Italie (métro 7), une vingtaine de minutes, arrêt « Henri " +
              "Thirard – Léon Jouhaux » — la rue des parkings."
     },
+    restaurant: {
+      titre: "Après la mairie",
+      texte: "Le repas se tient à L'Olivier d'Or, 111 rue de Montreuil, " +
+             "75011 Paris (quartier de la Nation). Comptez une bonne demi-" +
+             "heure depuis L'Haÿ-les-Roses : si vous êtes en voiture, " +
+             "proposez une place — et si vous n'en avez pas, dites-le nous, " +
+             "on s'arrange.",
+      lienTexte: "Itinéraire vers le restaurant",
+      lienUrl: "https://www.google.com/maps/dir/?api=1&origin=41+rue+Jean+Jaur%C3%A8s%2C+94240+L%27Ha%C3%BF-les-Roses&destination=L%27Olivier+d%27Or%2C+111+rue+de+Montreuil%2C+75011+Paris"
+    },
     metro: {
       titre: "Attention au métro",
       texte: "La ligne 14 a bien une station « L'Haÿ-les-Roses », mais elle " +
@@ -169,13 +180,14 @@ window.MARIAGE_CONFIG = {
     },
     contact: {
       titre: "Une question ?",
-      texte: "Écrivez-nous ou appelez-nous, nous répondons vite."
+      texte: "Appelez-nous, ou envoyez un message au numéro ci-dessous : " +
+             "nous répondons vite."
     }
   },
 
   contact: {
-    telephone: "",                    // [À COMPLÉTER] ex. "+33 6 12 34 56 78"
-    email: ""                         // [À COMPLÉTER]
+    telephone: "+33 7 80 71 32 50",   // Yassine — cliquable depuis un téléphone
+    email: ""                         // [À COMPLÉTER] si vous voulez aussi une adresse
   },
 
   /* --- 9. PALETTE ------------------------------------------------------

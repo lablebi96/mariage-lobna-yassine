@@ -250,6 +250,15 @@ a { color: var(--dore); }
 .carte-info h3 {
   font-size: 1.1rem; margin: 0 0 .4rem; color: var(--dore);
 }
+
+/* Lien au pied d'une carte-info (itinéraire, réservation…). */
+.carte-info__lien {
+  display: inline-block; margin-top: .7rem;
+  font-size: .85rem; letter-spacing: .06em;
+  color: var(--dore); text-decoration: none;
+  border-bottom: 1px solid currentColor; padding-bottom: 2px;
+}
+.carte-info__lien:hover, .carte-info__lien:focus-visible { color: var(--encre); }
 .carte-info p { margin: 0; color: var(--encre-doux); font-size: .95rem; }
 
 /* ==========================================================================

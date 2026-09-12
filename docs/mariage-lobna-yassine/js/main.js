@@ -395,6 +395,20 @@
 
       article.appendChild(h3);
       article.appendChild(p);
+
+      /* Lien optionnel (un itinéraire, une réservation). Les deux clés sont
+         requises : un lien sans texte ne se voit pas, un texte sans lien ne
+         mène nulle part. */
+      if (rempli(bloc.lienTexte) && rempli(bloc.lienUrl)) {
+        var lien = document.createElement("a");
+        lien.className = "carte-info__lien";
+        lien.href = bloc.lienUrl;
+        lien.textContent = bloc.lienTexte;
+        lien.target = "_blank";
+        lien.rel = "noopener";
+        article.appendChild(lien);
+      }
+
       grille.appendChild(article);
     });
 
