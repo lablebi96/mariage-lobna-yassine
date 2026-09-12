@@ -37,9 +37,9 @@ window.MARIAGE_CONFIG = {
   dateISO: "2026-10-24T11:00:00+02:00",   // [À CONFIRMER] samedi 24 octobre 2026 — l'heure est provisoire
   dateAffichee: "",                       // auto → « samedi 24 octobre 2026 »
 
-  dateNote: "Date en attente de confirmation par la mairie : ce sera le " +
-            "samedi 24 ou le samedi 31 octobre. Nous vous prévenons dès " +
-            "que c'est officiel.",
+  dateNote: "Date et heure encore en attente de confirmation par la mairie : " +
+            "ce sera le samedi 24 ou le samedi 31 octobre. Nous vous " +
+            "prévenons dès que c'est officiel.",
 
   surTitre: "Notre cérémonie civile",
 
@@ -96,8 +96,8 @@ window.MARIAGE_CONFIG = {
       texte: "Lecture des textes, discours de l'officier d'état civil, échange des consentements. Une trentaine de minutes, dans le calme." },
     { heure: "Juste après", titre: "Sortie et photos",
       texte: "Nous libérons la salle pour le mariage suivant. Photos dehors, devant l'Hôtel de ville." },
-    { heure: "Ensuite", titre: "[À COMPLÉTER]",
-      texte: "[À COMPLÉTER] Déjeuner, vin d'honneur… ou rien du tout : à supprimer si la journée s'arrête à la mairie." }
+    { heure: "Ensuite", titre: "Tous à table",
+      texte: "Un restaurant est réservé pour prolonger la journée ensemble. [À COMPLÉTER : nom et adresse du restaurant.] Signalez vos allergies dans le formulaire, nous transmettrons." }
   ],
 
   /* --- 6. GALERIE ------------------------------------------------------ */
@@ -120,8 +120,9 @@ window.MARIAGE_CONFIG = {
     endpoint: "",                     // [À COMPLÉTER] l'URL Google qui finit par /exec
     emailSecours: "",                 // [À COMPLÉTER] adresse de repli si le formulaire tombe en panne
 
-    dateLimite: "Merci de nous répondre avant le 10 octobre 2026 — la salle " +
-                "des mariages n'accueille que 80 personnes assises.",
+    dateLimite: "Merci de nous répondre avant le 10 octobre 2026 : la salle " +
+                "des mariages n'accueille que 80 personnes assises, et le " +
+                "restaurant a besoin d'un nombre de couverts.",
 
     /* Écrit sous le formulaire : évite le malentendu le plus probable. */
     note: "Cette réponse ne concerne que la cérémonie civile du mois " +
@@ -152,9 +153,19 @@ window.MARIAGE_CONFIG = {
              "amendes existent."
     },
     transport: {
-      titre: "Y venir",
-      texte: "[À COMPLÉTER] Indiquez ici la station et la ligne les plus " +
-             "pratiques, ou supprimez ce bloc en laissant le texte vide."
+      titre: "Y venir en transports",
+      texte: "Le plus simple : RER B jusqu'à Bourg-la-Reine, puis bus 172 " +
+             "ou 192 — l'arrêt s'appelle « Mairie de L'Haÿ-les-Roses » et " +
+             "se trouve devant. Depuis Paris sans RER : bus 186 à Porte " +
+             "d'Italie (métro 7), une vingtaine de minutes, arrêt « Henri " +
+             "Thirard – Léon Jouhaux » — la rue des parkings."
+    },
+    metro: {
+      titre: "Attention au métro",
+      texte: "La ligne 14 a bien une station « L'Haÿ-les-Roses », mais elle " +
+             "porte le nom de la ville sans en desservir le centre : elle " +
+             "est à l'autre bout de la commune, côté Chevilly-Larue. Il " +
+             "faut encore prendre un bus (131 ou 286). Préférez le RER B."
     },
     contact: {
       titre: "Une question ?",
