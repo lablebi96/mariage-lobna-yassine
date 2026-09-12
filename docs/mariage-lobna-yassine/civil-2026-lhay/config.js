@@ -117,8 +117,8 @@ window.MARIAGE_CONFIG = {
     actif: true,
     titre: "Serez-vous des nôtres ?",
 
-    endpoint: "",                     // [À COMPLÉTER] l'URL Google qui finit par /exec
-    emailSecours: "",                 // [À COMPLÉTER] adresse de repli si le formulaire tombe en panne
+    endpoint: "https://script.google.com/macros/s/AKfycbwDrco6-LqiB7I2Ir87Ip70QxDCYWiGT7uuJ3JqArfcKkBGK6enO5xiU051lekuwQZK/exec",                     // [À COMPLÉTER] l'URL Google qui finit par /exec
+    emailSecours: "yassouna.rouis@gmail.com",                 // [À COMPLÉTER] adresse de repli si le formulaire tombe en panne
 
     dateLimite: "Merci de nous répondre avant le 10 octobre 2026 : la salle " +
                 "des mariages n'accueille que 80 personnes assises, et le " +
