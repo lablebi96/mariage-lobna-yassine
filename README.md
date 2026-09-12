@@ -154,6 +154,46 @@ doit apparaître dans le Sheet et un e-mail arriver.
 Tant que `rsvp.endpoint` est vide, le bouton bascule automatiquement sur un
 envoi par e-mail (`rsvp.emailSecours`) : le site est utilisable dès maintenant.
 
+### Le tableau reste vide ?
+
+**Lancez `diagnostic` avant toute chose.** Dans l'éditeur Apps Script,
+choisissez `diagnostic` dans la liste déroulante en haut, cliquez sur
+**Exécuter**, et lisez le journal qui s'ouvre en bas. Il n'écrit rien dans le
+tableau : il ne fait que vérifier, et nomme la panne quand il en trouve une.
+
+Les trois causes, par ordre de fréquence :
+
+| Symptôme | Cause | Remède |
+|---|---|---|
+| Rien dans le tableau, **aucun e-mail** | Le script n'est lié à **aucun** Sheet — il a été créé depuis `script.google.com` plutôt que depuis *Extensions ▸ Apps Script* | Renseignez `ID_FEUILLE` en haut du script, puis redéployez |
+| Rien dans le tableau, **aucun e-mail**, l'URL `/exec` affiche une page de connexion | *Qui a accès* est réglé sur « Moi uniquement » | Remettez **Tout le monde** et redéployez |
+| Vos corrections n'ont aucun effet | L'ancienne version tourne encore | *Déployer ▸ Gérer les déploiements ▸ ✏️ ▸ Version : **Nouvelle*** |
+
+**L'identifiant du Sheet** est la longue suite de caractères au milieu de son
+adresse :
+
+```
+https://docs.google.com/spreadsheets/d/1a2B3c4D5e6F7g8H9i0J.../edit
+                                        └──── ceci ────┘
+```
+
+**Vérifier le déploiement sans passer par le site** : ouvrez l'URL `/exec`
+dans une fenêtre de **navigation privée** (sans quoi votre propre session
+Google masque le problème). Vous devez voir :
+
+```json
+{"status":"ok","message":"Le point de collecte RSVP fonctionne. …"}
+```
+
+Une page de connexion Google à la place, c'est le réglage *Qui a accès*.
+
+> **Pourquoi la page ne vous prévient-elle pas ?** Elle ne peut pas : Google
+> Apps Script ne renvoie pas les en-têtes qui permettraient au navigateur de
+> lire sa réponse. L'invité voit « merci » quoi qu'il arrive. C'est pourquoi
+> le script vous envoie désormais un e-mail **⚠️ RSVP PERDU** contenant la
+> réponse en clair chaque fois qu'une écriture échoue : même en panne, aucune
+> réponse n'est perdue pour de bon — il reste à la recopier à la main.
+
 ---
 
 ## 4. Mettre en ligne
