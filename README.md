@@ -265,6 +265,7 @@ plutôt que de recopier à la main :
 ```bash
 cd docs/mariage-lobna-yassine
 sed -e 's|href="css/|href="../css/|' \
+    -e 's|href="images/|href="../images/|' \
     -e 's|src="js/main.js"|src="../js/main.js"|' \
     -e 's|src="js/config.js"|src="config.js"|' \
     -e 's|content="images/|content="../images/|' \

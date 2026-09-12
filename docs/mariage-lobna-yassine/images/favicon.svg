@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Deux anneaux entrelacés">
+  <title>Lobna &amp; Yassine</title>
+  <!-- Pastille de fond : garantit le contraste sur un onglet clair comme
+       sombre, et permet de creuser l'entrelacs sans dépendre du fond. -->
+  <rect width="64" height="64" rx="14" fill="#faf6f1"/>
+
+  <!-- Anneaux volontairement peu chevauchants et à trait épais : à 16 px,
+       deux cercles trop serrés se lisent comme une tache unique. -->
+  <g fill="none" stroke="#b8935a" stroke-width="5.5">
+    <circle cx="23" cy="32" r="14"/>
+    <circle cx="41" cy="32" r="14"/>
+  </g>
+
+  <!-- L'entrelacs : l'anneau gauche repasse par-dessus le droit, en haut.
+       L'arc est centré sur le point de croisement (32 ; 21,28) et s'étend de
+       25° de part et d'autre — décentré, la coupure rongerait l'anneau droit
+       de travers. Le tracé clair creuse, le doré referme par-dessus — en coupe franche, seule
+       façon qu'il se raccorde exactement au cercle au lieu d'en déborder. Le doré
+       court 2° plus loin que le creux de chaque côté : deux bords strictement
+       superposés laisseraient un liseré d'anti-crénelage à la jonction. -->
+  <g fill="none">
+    <path d="M 26.62 18.48 A 14 14 0 0 1 35.69 26.08" stroke="#faf6f1" stroke-width="10"/>
+    <path d="M 26.15 18.36 A 14 14 0 0 1 35.89 26.53" stroke="#b8935a" stroke-width="5.5"/>
+  </g>
+</svg>
