@@ -1,35 +1,73 @@
 # Mariage de Lobna & Yassine
 
-Site statique d'invitation, une seule page, pensé pour le téléphone.
-Adresse visée : **https://www.sayloby.com/mariage-lobna-yassine/**
+Site statique d'invitation, pensé pour le téléphone. Pas de framework, pas de
+build, pas de serveur à maintenir.
 
-Pas de framework, pas de build, pas de serveur à maintenir : trois fichiers
-(HTML, CSS, JS) et un formulaire qui écrit dans un Google Sheet.
+---
+
+## 0. Deux mariages, deux pages
+
+Il y a **deux cérémonies**, et donc deux pages — qui partagent le même code,
+le même style et la même identité, mais pas le même public.
+
+| | Page publique | Page des proches |
+|---|---|---|
+| **Ce qu'elle annonce** | la célébration en Tunisie, **26 mars 2027** | la cérémonie civile à L'Haÿ-les-Roses, **octobre 2026** |
+| **Adresse** | `https://www.sayloby.com/mariage-lobna-yassine/` | `https://www.sayloby.com/mariage-lobna-yassine/civil-2026-lhay/` |
+| **Qui la reçoit** | tous les invités | seulement le cercle très proche |
+| **Formulaire de réponse** | aucun — juste un mot | **oui**, c'est là que tout se joue |
+| **Fichier à remplir** | `docs/mariage-lobna-yassine/js/config.js` | `docs/mariage-lobna-yassine/civil-2026-lhay/config.js` |
+
+**La page des proches n'est liée depuis nulle part.** Aucun lien n'y mène,
+son adresse ne se devine pas, et les moteurs de recherche en sont écartés
+(`noindex` + `robots.txt`). Elle s'envoie à la main, une personne à la fois.
+C'est ce qui permet d'annoncer un mariage restreint sans que personne ne s'y
+sente oublié : les invités de mars ne voient jamais l'existence d'octobre.
+
+> ⚠️ La seule façon de perdre cette discrétion est de coller le lien quelque
+> part de public (un groupe WhatsApp large, un réseau social). Envoyez-le en
+> message direct.
+
+**La confirmation de présence ne concerne que la mairie.** C'est écrit noir sur
+blanc sous le formulaire : la célébration tunisienne fera l'objet d'une
+invitation à part.
 
 ---
 
 ## 1. Remplir le contenu
 
-Tout le texte du site vit dans **un seul fichier** :
-
-```
-docs/mariage-lobna-yassine/js/config.js
-```
-
-Ouvrez-le, remplacez les valeurs marquées `[À COMPLÉTER]`, enregistrez.
-Aucune connaissance en HTML n'est nécessaire, et il n'y a rien d'autre à
-modifier.
+Tout le texte de chaque page vit dans **un seul fichier**, celui du tableau
+ci-dessus. Ouvrez-le, remplacez les valeurs marquées `[À COMPLÉTER]`,
+enregistrez. Aucune connaissance en HTML n'est nécessaire, et il n'y a rien
+d'autre à modifier.
 
 À renseigner en priorité :
 
 | Clé | Ce que c'est |
 |-----|--------------|
-| `dateISO` | la date du mariage — pilote le compte à rebours |
+| `dateISO` | la date de la cérémonie — pilote le compte à rebours |
+| `dateNote` | mention sous la date tant qu'elle n'est pas ferme ; `""` la fait disparaître |
 | `lieu.nom`, `lieu.adresse` | affichés à l'écran |
 | `lieu.mapsQuery` | l'adresse telle que vous la taperiez dans Google Maps (fait apparaître la carte) |
-| `programme` | les horaires de la journée |
-| `rsvp.endpoint` | l'URL du script Google (voir §3) |
+| `programme` | le déroulement |
+| `rsvp.endpoint` | l'URL du script Google (voir §3) — **page des proches uniquement** |
 | `rsvp.emailSecours` | l'adresse de repli si le formulaire tombe en panne |
+| `rsvp.actif` | `false` supprime le formulaire et affiche `rsvp.message` à la place |
+
+### La date d'octobre n'est pas encore ferme
+
+Elle dépend de l'audition à la mairie. Le site l'annonce franchement, sous la
+date : *« ce sera le samedi 24 ou le samedi 31 octobre »*. **Le jour où la
+mairie confirme**, deux lignes à changer dans `civil-2026-lhay/config.js` :
+
+```js
+dateISO: "2026-10-24T11:00:00+02:00",   // la vraie date, la vraie heure
+dateNote: "",                            // vide → la mention disparaît
+```
+
+Attention au décalage horaire en fin de ligne : l'heure d'été s'arrête le
+25 octobre 2026. Le **24 octobre s'écrit `+02:00`**, le **31 octobre
+`+01:00`**. (Se tromper d'une heure n'a aucune conséquence visible.)
 
 **Une valeur laissée vide masque proprement l'élément concerné.** Le site reste
 présentable même à moitié rempli : rien n'affiche « undefined », aucune image
@@ -64,8 +102,20 @@ mais la carte Google et le formulaire s'y comportent différemment.)
 
 ## 3. Formulaire RSVP → Google Sheet
 
-Les réponses arrivent dans un tableur que vous pouvez consulter à deux, trier
-et exporter. Gratuit, sans limite de volume.
+**Le tableau qui se remplit tout seul EST votre liste d'invités.** Rien à
+saisir à la main, rien à tenir à jour : chaque réponse ajoute une ligne. Vous
+le consultez à deux, vous triez, vous exportez.
+
+Les colonnes :
+
+```
+Horodatage | Événement | Prénom | Nom | Présence | Accompagnants | Total | Repas / allergies | Message
+```
+
+`Accompagnants` est ce que l'invité a saisi (0 s'il vient seul) ; `Total` est
+le nombre de chaises, lui compris. Une somme de la colonne `Total` vous donne
+le nombre de personnes attendues — et chaque e-mail de notification vous le
+rappelle déjà, sous la forme `37 / 80 places`.
 
 1. Créez un **Google Sheet** vide (par exemple « RSVP mariage »).
 2. Menu **Extensions ▸ Apps Script**.
@@ -81,7 +131,9 @@ et exporter. Gratuit, sans limite de volume.
    « Application non validée » est normal pour un script personnel — cliquez
    sur « Paramètres avancées » puis « Accéder à … »).
 7. Copiez l'URL fournie, celle qui **se termine par `/exec`**, et collez-la
-   dans `config.js` → `rsvp.endpoint`.
+   dans **`docs/mariage-lobna-yassine/civil-2026-lhay/config.js`** →
+   `rsvp.endpoint`. *(C'est bien le fichier de la page des proches : la page
+   publique n'a pas de formulaire.)*
 
 **Vérifiez tout de suite :** envoyez une réponse depuis le site. Une ligne
 doit apparaître dans le Sheet et un e-mail arriver.
@@ -191,12 +243,36 @@ redémarrer de ce côté.
     ├── robots.txt             demande aux moteurs de ne pas indexer
     ├── .nojekyll              GitHub sert les fichiers tels quels
     └── mariage-lobna-yassine/
-        ├── index.html         la page
-        ├── css/style.css      tout le style
-        ├── js/config.js       ← LE fichier à remplir
-        ├── js/main.js         la logique (compte à rebours, galerie, RSVP)
-        └── images/            vos photos
+        ├── index.html         PAGE PUBLIQUE — la Tunisie
+        ├── css/style.css      tout le style (partagé par les deux pages)
+        ├── js/config.js       ← le fichier de la page publique
+        ├── js/main.js         la logique (partagée : compte à rebours, galerie, RSVP)
+        ├── images/            vos photos (servent aux deux pages)
+        └── civil-2026-lhay/
+            ├── index.html     PAGE DES PROCHES — la mairie
+            └── config.js      ← le fichier de la page des proches
 ```
+
+**Une seule logique pour deux pages.** `main.js` et `style.css` ne sont écrits
+qu'une fois : la page des proches les charge avec `../`. Tout ce qui distingue
+les deux pages tient dans leur `config.js`. Corriger un bug, c'est le corriger
+partout.
+
+Les deux `index.html` sont volontairement identiques, aux chemins et aux
+métadonnées près. Si vous touchez à la structure de l'un, régénérez l'autre
+plutôt que de recopier à la main :
+
+```bash
+cd docs/mariage-lobna-yassine
+sed -e 's|href="css/|href="../css/|' \
+    -e 's|src="js/main.js"|src="../js/main.js"|' \
+    -e 's|src="js/config.js"|src="config.js"|' \
+    -e 's|content="images/|content="../images/|' \
+    index.html > civil-2026-lhay/index.html
+```
+
+Pensez ensuite à remettre le `<title>` et les métadonnées de partage de la
+page civile.
 
 **Pourquoi `docs/` et pas `public/` ?** GitHub Pages n'accepte que deux
 racines : celle du dépôt, ou `docs/`. Ce nom permet donc de publier sans
@@ -217,12 +293,23 @@ Tous les chemins internes sont **relatifs**. Pour servir la page ailleurs
 
 ---
 
-## 6. Avant d'envoyer le lien aux invités
+## 6. Avant d'envoyer les liens
 
-- [ ] Toutes les mentions `[À COMPLÉTER]` ont disparu de `config.js`
+**Les deux pages**
+
+- [ ] Toutes les mentions `[À COMPLÉTER]` ont disparu des deux `config.js`
 - [ ] La date du compte à rebours est la bonne
 - [ ] La carte affiche le bon endroit
-- [ ] Le formulaire a été testé : une ligne est bien arrivée dans le Sheet
-- [ ] Les photos pèsent moins de 300 Ko chacune
-- [ ] La page a été ouverte **sur un vrai téléphone**, pas seulement en
-      simulation — c'est là que 90 % des invités la liront
+- [ ] Les photos pèsent moins de 300 Ko chacune — ou bien `galerie: []`
+      (une galerie dont les fichiers manquent se masque toute seule, mais
+      autant ne pas s'en remettre à ça)
+- [ ] Les pages ont été ouvertes **sur un vrai téléphone**, pas seulement en
+      simulation — c'est là que 90 % des invités les liront
+
+**La page des proches, en plus**
+
+- [ ] `rsvp.endpoint` est renseigné et le formulaire a été testé pour de
+      vrai : une ligne est bien arrivée dans le Sheet, et l'e-mail aussi
+- [ ] `rsvp.emailSecours` est renseigné — c'est le filet si Google flanche
+- [ ] Le lien s'envoie **en message direct**, jamais dans un groupe large
+- [ ] Une fois la mairie confirmée : `dateISO` corrigé et `dateNote` vidé

@@ -30,6 +30,11 @@
   function afficher(el) { if (el) { el.hidden = false; } }
   function masquer(el) { if (el) { el.hidden = true; } }
 
+  /* Où vivent les photos, vu depuis la page en cours. La page principale est
+     à côté du dossier images/ ; une page rangée dans un sous-dossier doit
+     remonter d'un cran (« ../images/ »). Une seule ligne de config suffit. */
+  var DOSSIER_IMAGES = rempli(C.cheminImages) ? C.cheminImages : "images/";
+
   /* ======================================================================
      0. PALETTE — config.palette écrase les variables CSS
      ====================================================================== */
@@ -89,6 +94,25 @@
   ecrire("lieu-date", texteDate);
   ecrire("pied-date", texteDate);
 
+  /* Une date encore suspendue à une confirmation se dit franchement, sous la
+     date elle-même : mieux vaut un invité prévenu qu'un invité déplacé pour
+     rien. Laisser dateNote vide fait disparaître la mention. */
+  if (ecrire("hero-date-note", C.dateNote)) { afficher($("hero-date-note")); }
+  if (ecrire("lieu-date-note", C.dateNote)) { afficher($("lieu-date-note")); }
+
+  ecrire("hero-sur-titre", C.surTitre);
+
+  /* Le bouton du hero : sa cible change d'une page à l'autre (le formulaire
+     ici, la simple suite de la page là). Texte vide = pas de bouton. */
+  (function boutonHero() {
+    var b = $("hero-bouton");
+    var conf = C.heroBouton || {};
+    if (!b) { return; }
+    if (!rempli(conf.texte)) { masquer(b); return; }
+    b.textContent = conf.texte;
+    b.href = rempli(conf.ancre) ? conf.ancre : "#rsvp";
+  })();
+
   /* ======================================================================
      3. COMPTE À REBOURS
      ====================================================================== */
@@ -146,9 +170,9 @@
     if (!img || !rempli(C.photoAccueil)) { return; }
     img.addEventListener("load", function () { img.hidden = false; });
     img.addEventListener("error", function () {
-      console.info("Photo d'accueil absente : images/" + C.photoAccueil + " (dégradé utilisé)");
+      console.info("Photo d'accueil absente : " + DOSSIER_IMAGES + C.photoAccueil + " (dégradé utilisé)");
     });
-    img.src = "images/" + C.photoAccueil;
+    img.src = DOSSIER_IMAGES + C.photoAccueil;
   })();
 
   /* ======================================================================
@@ -261,16 +285,19 @@
       bouton.className = "galerie__vignette";
 
       var img = document.createElement("img");
-      img.src = "images/" + photo.fichier;
       img.alt = photo.alt || "";
       img.loading = "lazy";
       img.decoding = "async";
 
-      /* Une photo manquante retire sa vignette : pas d'icône cassée. */
+      /* Une photo manquante retire sa vignette : pas d'icône cassée.
+         L'écouteur est posé AVANT src, sans quoi une erreur immédiate
+         (fichier déjà connu absent) passerait inaperçue. */
       img.addEventListener("error", function () {
         bouton.remove();
         if (grille.children.length === 0) { masquer(section); }
       });
+
+      img.src = DOSSIER_IMAGES + photo.fichier;
 
       bouton.appendChild(img);
       bouton.addEventListener("click", function () { ouvrir(bouton); });
@@ -278,6 +305,22 @@
     });
 
     afficher(section);
+
+    /* Les vignettes sont en chargement paresseux : hors écran, elles ne se
+       chargent pas, donc leur absence ne se voit pas — et la section resterait
+       affichée en rectangles vides jusqu'à ce qu'on descende jusqu'à elle.
+       On sonde donc la première photo à part, hors lazy. Si le dossier images/
+       est encore vide, la section disparaît tout de suite. */
+    (function sonderPremierePhoto() {
+      var premiere = photos.filter(function (ph) { return rempli(ph && ph.fichier); })[0];
+      if (!premiere) { return; }
+      var sonde = new Image();
+      sonde.addEventListener("error", function () {
+        console.info("Aucune photo dans " + DOSSIER_IMAGES + " : galerie masquée.");
+        masquer(section);
+      });
+      sonde.src = DOSSIER_IMAGES + premiere.fichier;
+    })();
 
     /* --- Visionneuse plein écran --- */
     var boite = $("lightbox");
@@ -352,6 +395,20 @@
 
       article.appendChild(h3);
       article.appendChild(p);
+
+      /* Lien optionnel (un itinéraire, une réservation). Les deux clés sont
+         requises : un lien sans texte ne se voit pas, un texte sans lien ne
+         mène nulle part. */
+      if (rempli(bloc.lienTexte) && rempli(bloc.lienUrl)) {
+        var lien = document.createElement("a");
+        lien.className = "carte-info__lien";
+        lien.href = bloc.lienUrl;
+        lien.textContent = bloc.lienTexte;
+        lien.target = "_blank";
+        lien.rel = "noopener";
+        article.appendChild(lien);
+      }
+
       grille.appendChild(article);
     });
 
@@ -375,25 +432,45 @@
   })();
 
   /* ======================================================================
-     10. FORMULAIRE RSVP
+     10. RSVP
+     Deux modes, pilotés par config.rsvp.actif :
+       · true  → le formulaire s'affiche et part vers le script Google ;
+       · false → le formulaire disparaît, remplacé par rsvp.message.
+     C'est le second cas sur la page publique : seule la célébration civile
+     appelle une réponse, et un formulaire inutile n'y ferait qu'égarer.
      ====================================================================== */
 
   (function rsvp() {
-    var form = $("form-rsvp");
-    if (!form) { return; }
+    var section = $("rsvp");
+    if (!section) { return; }
 
     var R = C.rsvp || {};
-    var etat = $("form-etat");
-    var bouton = $("rsvp-envoyer");
-    var champPersonnes = $("champ-personnes");
-    var champRegime = $("champ-regime");
+    var form = $("form-rsvp");
+
+    ecrire("rsvp-titre", R.titre);
+
+    /* --- Mode « aucune réponse attendue » ---------------------------- */
+    if (R.actif === false) {
+      if (form) { form.remove(); }
+      if (ecrire("rsvp-message", R.message)) { afficher($("rsvp-message")); }
+      else { masquer(section); }
+      return;
+    }
+
+    if (!form) { return; }
 
     ecrire("rsvp-limite", R.dateLimite);
+    if (ecrire("rsvp-note", R.note)) { afficher($("rsvp-note")); }
 
-    /* --- Les champs « repas » n'ont de sens que si l'invité vient --- */
+    var etat = $("form-etat");
+    var bouton = $("rsvp-envoyer");
+    var champAccompagnants = $("champ-accompagnants");
+    var champRegime = $("champ-regime");
+
+    /* --- Accompagnants et repas n'ont de sens que si l'invité vient --- */
     function majPresence() {
       var vient = $("presence-oui").checked;
-      champPersonnes.hidden = !vient;
+      champAccompagnants.hidden = !vient;
       champRegime.hidden = !vient;
     }
     $("presence-oui").addEventListener("change", majPresence);
@@ -406,17 +483,19 @@
     }
 
     /** Lien de secours : quand le formulaire ne peut pas partir. */
-    function lienMailto(donnees) {
+    function lienMailto(d) {
       if (!rempli(R.emailSecours)) { return null; }
       var corps = [
-        "Nom : " + (donnees.nom || ""),
-        "Présence : " + (donnees.presence || ""),
-        "Nombre de personnes : " + (donnees.personnes || ""),
-        "Repas / allergies : " + (donnees.regime || ""),
-        "Message : " + (donnees.message || "")
+        "Prénom : " + d.prenom,
+        "Nom : " + d.nom,
+        "Présence : " + d.presence,
+        "Personnes m'accompagnant : " + d.accompagnants,
+        "Total (moi compris) : " + d.total,
+        "Repas / allergies : " + d.regime,
+        "Message : " + d.message
       ].join("\n");
       return "mailto:" + R.emailSecours
-        + "?subject=" + encodeURIComponent("RSVP mariage — " + (donnees.nom || ""))
+        + "?subject=" + encodeURIComponent("RSVP — " + d.prenom + " " + d.nom)
         + "&body=" + encodeURIComponent(corps);
     }
 
@@ -431,21 +510,25 @@
       }
     }
 
+    /** Signale un champ obligatoire laissé vide, et s'arrête là. */
+    function manque(champ, texte) {
+      champ.parentElement.classList.add("champ--erreur");
+      afficherEtat(texte, "erreur");
+      champ.focus();
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      /* --- Validation, en français et sans bloquer sur une broutille --- */
+      var prenom = $("prenom");
       var nom = $("nom");
       var presenceChoisie = form.querySelector('input[name="presence"]:checked');
 
+      prenom.parentElement.classList.remove("champ--erreur");
       nom.parentElement.classList.remove("champ--erreur");
 
-      if (!rempli(nom.value)) {
-        nom.parentElement.classList.add("champ--erreur");
-        afficherEtat("Merci d'indiquer votre nom.", "erreur");
-        nom.focus();
-        return;
-      }
+      if (!rempli(prenom.value)) { return manque(prenom, "Merci d'indiquer votre prénom."); }
+      if (!rempli(nom.value))    { return manque(nom, "Merci d'indiquer votre nom."); }
       if (!presenceChoisie) {
         afficherEtat("Merci d'indiquer si vous serez présent·e.", "erreur");
         $("presence-oui").focus();
@@ -453,12 +536,24 @@
       }
 
       var vient = presenceChoisie.value === "Oui";
+
+      /* Le formulaire demande les accompagnants ; le tableau reçoit aussi le
+         total, seul chiffre utile pour compter les chaises. */
+      var accompagnants = 0;
+      if (vient) {
+        accompagnants = parseInt($("accompagnants").value, 10);
+        if (isNaN(accompagnants) || accompagnants < 0) { accompagnants = 0; }
+      }
+
       var donnees = {
-        nom: nom.value.trim(),
-        presence: presenceChoisie.value,
-        personnes: vient ? ($("personnes").value || "1") : "0",
-        regime: vient ? $("regime").value.trim() : "",
-        message: $("message").value.trim()
+        evenement:     R.evenement || "",
+        prenom:        prenom.value.trim(),
+        nom:           nom.value.trim(),
+        presence:      presenceChoisie.value,
+        accompagnants: String(accompagnants),
+        total:         vient ? String(accompagnants + 1) : "0",
+        regime:        vient ? $("regime").value.trim() : "",
+        message:       $("message").value.trim()
       };
 
       /* Piège à robots : rempli = automate. On fait mine d'accepter. */
@@ -496,7 +591,11 @@
           form.innerHTML = "";
           afficherEtat(
             vient
-              ? "Merci " + donnees.nom + " ! Votre présence est enregistrée, nous avons hâte."
+              ? "Merci " + donnees.prenom + " ! Votre présence est enregistrée"
+                + (accompagnants > 0
+                    ? " pour " + donnees.total + " personnes."
+                    : ".")
+                + " Nous avons hâte."
               : "Merci pour votre réponse. Vous nous manquerez.",
             "ok"
           );

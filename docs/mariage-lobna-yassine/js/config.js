@@ -12,6 +12,10 @@
    - Après modification : enregistrer le fichier, puis rafraîchir la page.
    ========================================================================== */
 
+/* ⚠ Ce fichier ne concerne QUE la page publique (la célébration en Tunisie).
+   La cérémonie civile à L'Haÿ-les-Roses a sa propre page et son propre
+   fichier :  civil-2026-lhay/config.js                                    */
+
 window.MARIAGE_CONFIG = {
 
   /* --- 1. LE COUPLE -------------------------------------------------- */
@@ -32,6 +36,20 @@ window.MARIAGE_CONFIG = {
      -------------------------------------------------------------------- */
   dateISO: "2027-03-26T21:00:00+01:00",           // vendredi 26 mars 2027, 21h00
   dateAffichee: "",                                // auto → « vendredi 26 mars 2027 »
+
+  /* Mention affichée sous la date, quand celle-ci n'est pas encore ferme.
+     Vide = aucune mention. */
+  dateNote: "",
+
+  /* Phrase au-dessus des prénoms, tout en haut de la page. */
+  surTitre: "Nous nous marions",
+
+  /* Le bouton du grand écran d'accueil. Cette page n'attend aucune réponse :
+     il invite simplement à faire défiler. texte: "" supprime le bouton. */
+  heroBouton: {
+    texte: "Découvrir",
+    ancre: "#lieu"
+  },
 
   /* --- 3. NOTRE HISTOIRE (section optionnelle) ------------------------
      Mettre texte: "" pour supprimer complètement la section.
@@ -92,15 +110,17 @@ window.MARIAGE_CONFIG = {
   photoAccueil: "couple.jpg",
 
   /* --- 7. RSVP ---------------------------------------------------------
-     endpoint : l'URL du script Google (se termine par /exec).
-     Voir README.md, section « Formulaire RSVP », pour l'obtenir en 5 min.
-     Tant que endpoint est vide, le formulaire bascule automatiquement sur
-     un envoi par e-mail — le site reste donc utilisable dès maintenant.
+     Sur CETTE page, aucune réponse n'est demandée : la confirmation de
+     présence ne concerne que la cérémonie civile en France. actif: false
+     remplace donc le formulaire par le texte ci-dessous.
+     (Le formulaire, lui, vit dans civil-2026-lhay/config.js.)
      -------------------------------------------------------------------- */
   rsvp: {
-    endpoint: "",                                  // [À COMPLÉTER]
-    emailSecours: "",                              // [À COMPLÉTER] ex. "lobna.yassine@example.com"
-    dateLimite: "[À COMPLÉTER] Merci de répondre avant le 1er mai."
+    actif: false,
+    titre: "Nous comptons sur vous",
+    message: "Il n'y a rien à remplir ici : votre invitation vous parviendra, " +
+             "avec tous les détails pratiques, bien avant le mois de mars. " +
+             "D'ici là, notez la date — et écrivez-nous pour la moindre question."
   },
 
   /* --- 8. INFOS PRATIQUES ---------------------------------------------
