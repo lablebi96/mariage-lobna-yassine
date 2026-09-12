@@ -90,10 +90,12 @@ a { color: var(--dore); }
 }
 .hero__fond img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Voile sombre : sans lui, un texte clair sur photo devient illisible */
+/* Voile sombre : sans lui, un texte clair sur photo devient illisible.
+   Le palier du milieu est volontairement soutenu : c'est là que tombent
+   les prénoms, et une photo peut y présenter une zone très claire. */
 .hero__voile {
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(38,32,30,.45) 0%, rgba(38,32,30,.30) 40%, rgba(38,32,30,.62) 100%);
+  background: linear-gradient(180deg, rgba(38,32,30,.48) 0%, rgba(38,32,30,.44) 45%, rgba(38,32,30,.66) 100%);
 }
 
 .hero__contenu { position: relative; max-width: 34rem; }

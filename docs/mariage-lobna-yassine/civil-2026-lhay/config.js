@@ -102,9 +102,10 @@ window.MARIAGE_CONFIG = {
 
   /* --- 6. GALERIE ------------------------------------------------------ */
   galerie: [
-    { fichier: "photo-1.jpg", alt: "Lobna et Yassine" },
-    { fichier: "photo-2.jpg", alt: "Lobna et Yassine" },
-    { fichier: "photo-3.jpg", alt: "Lobna et Yassine" }
+    { fichier: "photo-1.jpg", alt: "Lobna et Yassine devant la tour Eiffel, à Paris" },
+    { fichier: "photo-2.jpg", alt: "Main dans la main dans une ruelle de La Valette, le soir" },
+    { fichier: "photo-3.jpg", alt: "Lobna et Yassine devant la gare centrale d'Amsterdam" },
+    { fichier: "photo-4.jpg", alt: "Lobna et Yassine à l'entrée de la course Hyrox, à Gand" }
   ],
 
   photoAccueil: "couple.jpg",
