@@ -119,6 +119,13 @@ a { color: var(--dore); }
   font-size: .95rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 300;
 }
 
+/* Mention « date à confirmer » : lisible, jamais criarde. */
+.hero__note {
+  margin: .5rem 0 0;
+  font-size: .82rem; font-style: italic; letter-spacing: .04em;
+  color: rgba(255,253,251,.82);
+}
+
 .compte-a-rebours {
   display: flex; justify-content: center; gap: .5rem;
   margin: 2.25rem 0 2rem;
@@ -211,6 +218,12 @@ a { color: var(--dore); }
 .lieu__nom { font-family: var(--serif); font-size: 1.35rem; margin: 0 0 .35rem; }
 .lieu__adresse { margin: 0; color: var(--encre-doux); }
 .lieu__heure { margin: .35rem 0 0; color: var(--encre-doux); font-size: .95rem; }
+
+/* Se loge sous la date, dont la marge basse fournit déjà l'espacement. */
+.lieu__note {
+  margin: -1.1rem 0 1.5rem;
+  font-size: .88rem; font-style: italic; color: var(--encre-doux);
+}
 
 .carte {
   margin: 2.5rem auto 0;
@@ -352,6 +365,19 @@ a { color: var(--dore); }
   transition: border-color .2s;
 }
 .champ input:focus, .champ textarea:focus { border-color: var(--dore); }
+
+/* Précision sous un champ : minuscule, jamais en majuscules comme le label. */
+.champ__aide {
+  margin: .4rem 0 0;
+  font-size: .85rem; color: var(--encre-doux);
+  text-transform: none; letter-spacing: 0; font-weight: 400;
+}
+
+/* Rappel placé après le formulaire (ex. « ceci ne concerne que la mairie »). */
+.rsvp__note {
+  margin: 1.75rem auto 0; max-width: 34rem;
+  font-size: .88rem; font-style: italic; color: var(--encre-doux);
+}
 .champ textarea { resize: vertical; }
 
 .champ--choix { border: 0; margin: 0 0 1.35rem; padding: 0; }
