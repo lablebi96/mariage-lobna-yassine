@@ -46,7 +46,7 @@ d'autre à modifier.
 | Clé | Ce que c'est |
 |-----|--------------|
 | `dateISO` | la date de la cérémonie — pilote le compte à rebours |
-| `dateNote` | mention sous la date tant qu'elle n'est pas ferme ; `""` la fait disparaître |
+| `dateNote` | mention sous la date tant qu'il reste une inconnue ; `""` la fait disparaître |
 | `lieu.nom`, `lieu.adresse` | affichés à l'écran |
 | `lieu.mapsQuery` | l'adresse telle que vous la taperiez dans Google Maps (fait apparaître la carte) |
 | `programme` | le déroulement |
@@ -54,20 +54,31 @@ d'autre à modifier.
 | `rsvp.emailSecours` | l'adresse de repli si le formulaire tombe en panne |
 | `rsvp.actif` | `false` supprime le formulaire et affiche `rsvp.message` à la place |
 
-### La date d'octobre n'est pas encore ferme
+### La date est fixée, l'heure suit
 
-Elle dépend de l'audition à la mairie. Le site l'annonce franchement, sous la
-date : *« ce sera le samedi 24 ou le samedi 31 octobre »*. **Le jour où la
-mairie confirme**, deux lignes à changer dans `civil-2026-lhay/config.js` :
+**Samedi 24 octobre 2026**, confirmé par la mairie. **L'heure de la cérémonie
+sera communiquée le 29 septembre 2026** — d'ici là, le site le dit sous la
+date plutôt que d'afficher un horaire inventé.
+
+En attendant, `dateISO` porte un 11:00 qui n'est qu'un espace réservé. Il ne
+fausse que les heures et les minutes du compte à rebours, jamais le nombre de
+jours — et c'est le nombre de jours que les invités regardent.
+
+**Le 29 septembre**, deux lignes à changer dans `civil-2026-lhay/config.js` :
 
 ```js
-dateISO: "2026-10-24T11:00:00+02:00",   // la vraie date, la vraie heure
+dateISO: "2026-10-24T14:30:00+02:00",   // remplacer 11:00:00 par la vraie heure
 dateNote: "",                            // vide → la mention disparaît
 ```
 
-Attention au décalage horaire en fin de ligne : l'heure d'été s'arrête le
-25 octobre 2026. Le **24 octobre s'écrit `+02:00`**, le **31 octobre
-`+01:00`**. (Se tromper d'une heure n'a aucune conséquence visible.)
+Ne touchez pas au `+02:00` : l'heure d'été court jusqu'au 25 octobre 2026, le
+24 tombe donc juste avant le changement. (Se tromper d'une heure n'aurait
+d'ailleurs aucune conséquence visible.)
+
+Le déroulement de la journée est écrit en repères relatifs — *« −15 min »*,
+*« L'heure dite »* — ce qui reste juste quelle que soit l'heure retenue. Une
+fois l'horaire connu, vous pouvez les remplacer par de vrais horaires dans
+`programme`, ou les laisser tels quels.
 
 **Une valeur laissée vide masque proprement l'élément concerné.** Le site reste
 présentable même à moitié rempli : rien n'affiche « undefined », aucune image
@@ -313,4 +324,5 @@ Tous les chemins internes sont **relatifs**. Pour servir la page ailleurs
       vrai : une ligne est bien arrivée dans le Sheet, et l'e-mail aussi
 - [ ] `rsvp.emailSecours` est renseigné — c'est le filet si Google flanche
 - [ ] Le lien s'envoie **en message direct**, jamais dans un groupe large
-- [ ] Une fois la mairie confirmée : `dateISO` corrigé et `dateNote` vidé
+- [ ] Le 29 septembre, quand la mairie donne l'heure : `dateISO` corrigé et
+      `dateNote` vidé

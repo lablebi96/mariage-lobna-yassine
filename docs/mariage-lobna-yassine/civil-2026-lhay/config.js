@@ -22,24 +22,24 @@ window.MARIAGE_CONFIG = {
   },
 
   /* --- 2. LA DATE ----------------------------------------------------
-     ⚠ DATE ENCORE PROVISOIRE. La mairie confirme après l'audition du début
-     octobre : ce sera le samedi 24 ou le samedi 31 octobre 2026.
+     ✅ DATE CONFIRMÉE par la mairie : samedi 24 octobre 2026.
+     ⏳ L'HEURE, elle, sera communiquée le 29 septembre 2026.
 
-     Le compte à rebours vise pour l'instant le 24. Le jour où la date est
-     officielle, deux lignes à changer ici :
-       · dateISO   → la vraie date et la vraie heure
-       · dateNote  → "" pour faire disparaître la mention « à confirmer »
+     L'heure ci-dessous reste donc un espace réservé. Elle ne fausse que les
+     heures et minutes du compte à rebours, jamais le nombre de jours — c'est
+     ce que les invités regardent. Le 29 septembre, deux lignes à changer :
+       · dateISO   → remplacer 11:00:00 par la vraie heure
+       · dateNote  → "" pour faire disparaître la mention
 
-     Attention au décalage horaire en fin de ligne : l'heure d'été s'arrête
-     le 25 octobre 2026. Le 24 octobre s'écrit donc "+02:00", et le
-     31 octobre "+01:00".
+     Ne touchez pas au "+02:00" de fin de ligne : l'heure d'été court jusqu'au
+     25 octobre 2026, le 24 tombe donc juste avant le changement.
      -------------------------------------------------------------------- */
-  dateISO: "2026-10-24T11:00:00+02:00",   // [À CONFIRMER] samedi 24 octobre 2026 — l'heure est provisoire
+  dateISO: "2026-10-24T11:00:00+02:00",   // samedi 24 octobre 2026 — seule l'heure reste provisoire
   dateAffichee: "",                       // auto → « samedi 24 octobre 2026 »
 
-  dateNote: "Date et heure encore en attente de confirmation par la mairie : " +
-            "ce sera le samedi 24 ou le samedi 31 octobre. Nous vous " +
-            "prévenons dès que c'est officiel.",
+  dateNote: "La date est confirmée. Seule l'heure de la cérémonie nous " +
+            "manque encore : la mairie nous la communique le 29 septembre, " +
+            "et nous vous la transmettons aussitôt.",
 
   surTitre: "Notre cérémonie civile",
 
@@ -85,9 +85,11 @@ window.MARIAGE_CONFIG = {
   },
 
   /* --- 5. DÉROULEMENT -------------------------------------------------
-     Les horaires précis dépendent de l'heure que fixera la mairie. En
-     attendant, la timeline est écrite en repères relatifs : elle reste
-     juste quelle que soit l'heure retenue.
+     Tant que la mairie n'a pas donné l'heure (le 29 septembre), la timeline
+     est écrite en repères relatifs : elle reste juste quelle que soit
+     l'heure retenue. Vous pourrez ensuite remplacer « −15 min » et
+     « L'heure dite » par de vrais horaires — ou les laisser, ils se
+     défendent très bien.
      -------------------------------------------------------------------- */
   programme: [
     { heure: "−15 min", titre: "Rendez-vous devant la mairie",
@@ -126,13 +128,13 @@ window.MARIAGE_CONFIG = {
                 "restaurant a besoin d'un nombre de couverts.",
 
     /* Écrit sous le formulaire : évite le malentendu le plus probable. */
-    note: "Cette réponse ne concerne que la cérémonie civile du mois " +
-          "d'octobre. La célébration en Tunisie, en mars 2027, fera l'objet " +
-          "d'une invitation à part.",
+    note: "Cette réponse ne concerne que la cérémonie civile du 24 octobre. " +
+          "La célébration en Tunisie, en mars 2027, fera l'objet d'une " +
+          "invitation à part.",
 
     /* Recopié dans le tableau des réponses : utile le jour où un second
        formulaire existera. */
-    evenement: "Mairie de L'Haÿ-les-Roses — octobre 2026"
+    evenement: "Mairie de L'Haÿ-les-Roses — 24 octobre 2026"
   },
 
   /* --- 8. INFOS PRATIQUES --------------------------------------------- */
