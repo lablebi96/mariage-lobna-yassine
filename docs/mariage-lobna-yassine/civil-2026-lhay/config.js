@@ -99,7 +99,7 @@ window.MARIAGE_CONFIG = {
     { heure: "Juste après", titre: "Sortie et photos",
       texte: "Nous libérons la salle pour le mariage suivant. Photos dehors, devant l'Hôtel de ville." },
     { heure: "Ensuite", titre: "Tous à table",
-      texte: "Direction Paris : nous prolongeons la journée à L'Olivier d'Or, 111 rue de Montreuil, dans le 11e, à deux pas de la Nation. Signalez vos allergies dans le formulaire, nous transmettrons." }
+      texte: "Direction Puteaux : nous prolongeons la journée à Maison Olivine. [À COMPLÉTER : adresse exacte, voir bloc « Après la mairie » plus bas.] Signalez vos allergies dans le formulaire, nous transmettrons." }
   ],
 
   /* --- 6. GALERIE ------------------------------------------------------ */
@@ -166,13 +166,17 @@ window.MARIAGE_CONFIG = {
     },
     restaurant: {
       titre: "Après la mairie",
-      texte: "Le repas se tient à L'Olivier d'Or, 111 rue de Montreuil, " +
-             "75011 Paris (quartier de la Nation). Comptez une bonne demi-" +
-             "heure depuis L'Haÿ-les-Roses : si vous êtes en voiture, " +
-             "proposez une place — et si vous n'en avez pas, dites-le nous, " +
-             "on s'arrange.",
+      // ⚠️ [À COMPLÉTER] Adresse exacte de Maison Olivine — non retrouvée en
+      // ligne pour vérifier le numéro et la rue. Une fois confirmée,
+      // complétez le texte ci-dessous ET reconstruisez lienUrl (remplacer
+      // "Maison+Olivine%2C+Puteaux" par l'adresse complète encodée).
+      texte: "Le repas se tient à Maison Olivine, à Puteaux [À COMPLÉTER : " +
+             "adresse exacte]. Puteaux est de l'autre côté de Paris par " +
+             "rapport à L'Haÿ-les-Roses : prévoyez une bonne marge sur le " +
+             "trajet. Si vous êtes en voiture, proposez une place — et si " +
+             "vous n'en avez pas, dites-le nous, on s'arrange.",
       lienTexte: "Itinéraire vers le restaurant",
-      lienUrl: "https://www.google.com/maps/dir/?api=1&origin=41+rue+Jean+Jaur%C3%A8s%2C+94240+L%27Ha%C3%BF-les-Roses&destination=L%27Olivier+d%27Or%2C+111+rue+de+Montreuil%2C+75011+Paris"
+      lienUrl: "https://www.google.com/maps/dir/?api=1&origin=41+rue+Jean+Jaur%C3%A8s%2C+94240+L%27Ha%C3%BF-les-Roses&destination=Maison+Olivine%2C+Puteaux"
     },
     metro: {
       titre: "Attention au métro",
