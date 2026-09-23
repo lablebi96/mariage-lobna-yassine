@@ -193,7 +193,7 @@ window.MARIAGE_CONFIG = {
   },
 
   contact: {
-    telephone: "+33 7 80 71 32 50",   // Yassine — cliquable depuis un téléphone
+    telephone: "+33 7 80 81 32 50",   // Yassine — cliquable depuis un téléphone
     email: ""                         // [À COMPLÉTER] si vous voulez aussi une adresse
   },
 
