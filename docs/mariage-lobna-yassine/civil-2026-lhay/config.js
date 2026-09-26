@@ -71,7 +71,11 @@ window.MARIAGE_CONFIG = {
     heureArrivee: "Merci d'être devant la mairie 15 minutes avant le début " +
                   "de la cérémonie : les cortèges en retard sont reportés " +
                   "après les autres mariages du jour.",
-    mapsQuery: "Hôtel de Ville, 41 rue Jean Jaurès, 94240 L'Haÿ-les-Roses",
+    // ⚠️ Ne PAS faire précéder l'adresse de « Hôtel de Ville » : ce nom est
+    // générique (chaque commune de France en a un), et le moteur de carte
+    // sans clé ne sait alors pas lequel choisir — il affiche le monde entier
+    // plutôt qu'un point précis. L'adresse seule, elle, ne désigne qu'un lieu.
+    mapsQuery: "41 rue Jean Jaurès, 94240 L'Haÿ-les-Roses",
     parking: "Le centre-ville est en zone bleue : disque obligatoire derrière " +
              "le pare-brise. Le plus simple est le parking souterrain de la " +
              "Halle de marché, 13 rue Henri Thirard — gratuit les 3 premières " +
