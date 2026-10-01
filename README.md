@@ -54,31 +54,22 @@ d'autre à modifier.
 | `rsvp.emailSecours` | l'adresse de repli si le formulaire tombe en panne |
 | `rsvp.actif` | `false` supprime le formulaire et affiche `rsvp.message` à la place |
 
-### La date est fixée, l'heure suit
+### La date et l'heure
 
-**Samedi 24 octobre 2026**, confirmé par la mairie. **L'heure de la cérémonie
-sera communiquée le 29 septembre 2026** — d'ici là, le site le dit sous la
-date plutôt que d'afficher un horaire inventé.
+**Samedi 24 octobre 2026, 14h30** — confirmé par la mairie, plus rien n'est
+en attente. `dateNote` est vide : la mention qui s'affichait sous le compte
+à rebours a disparu d'elle-même.
 
-En attendant, `dateISO` porte un 11:00 qui n'est qu'un espace réservé. Il ne
-fausse que les heures et les minutes du compte à rebours, jamais le nombre de
-jours — et c'est le nombre de jours que les invités regardent.
+Ne touchez pas au `+02:00` de `dateISO` si vous retouchez cette ligne :
+l'heure d'été court jusqu'au 25 octobre 2026, le 24 tombe donc juste avant
+le changement. (Se tromper d'une heure n'aurait d'ailleurs aucune
+conséquence visible.)
 
-**Le 29 septembre**, deux lignes à changer dans `civil-2026-lhay/config.js` :
-
-```js
-dateISO: "2026-10-24T14:30:00+02:00",   // remplacer 11:00:00 par la vraie heure
-dateNote: "",                            // vide → la mention disparaît
-```
-
-Ne touchez pas au `+02:00` : l'heure d'été court jusqu'au 25 octobre 2026, le
-24 tombe donc juste avant le changement. (Se tromper d'une heure n'aurait
-d'ailleurs aucune conséquence visible.)
-
-Le déroulement de la journée est écrit en repères relatifs — *« −15 min »*,
-*« L'heure dite »* — ce qui reste juste quelle que soit l'heure retenue. Une
-fois l'horaire connu, vous pouvez les remplacer par de vrais horaires dans
-`programme`, ou les laisser tels quels.
+Le déroulement de la journée porte les vrais horaires, creux compris : la
+mairie libère la salle à 15h30, le dîner commence à 20h, et l'étape « Place
+à la séance photo » explique ce qui occupe les quatre heures entre les deux
+— les invités sont libres durant ce temps, ce n'est pas un oubli du
+programme.
 
 **Une valeur laissée vide masque proprement l'élément concerné.** Le site reste
 présentable même à moitié rempli : rien n'affiche « undefined », aucune image
@@ -324,5 +315,3 @@ Tous les chemins internes sont **relatifs**. Pour servir la page ailleurs
       vrai : une ligne est bien arrivée dans le Sheet, et l'e-mail aussi
 - [ ] `rsvp.emailSecours` est renseigné — c'est le filet si Google flanche
 - [ ] Le lien s'envoie **en message direct**, jamais dans un groupe large
-- [ ] Le 29 septembre, quand la mairie donne l'heure : `dateISO` corrigé et
-      `dateNote` vidé

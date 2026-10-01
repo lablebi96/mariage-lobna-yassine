@@ -22,24 +22,15 @@ window.MARIAGE_CONFIG = {
   },
 
   /* --- 2. LA DATE ----------------------------------------------------
-     ✅ DATE CONFIRMÉE par la mairie : samedi 24 octobre 2026.
-     ⏳ L'HEURE, elle, sera communiquée le 29 septembre 2026.
-
-     L'heure ci-dessous reste donc un espace réservé. Elle ne fausse que les
-     heures et minutes du compte à rebours, jamais le nombre de jours — c'est
-     ce que les invités regardent. Le 29 septembre, deux lignes à changer :
-       · dateISO   → remplacer 11:00:00 par la vraie heure
-       · dateNote  → "" pour faire disparaître la mention
+     ✅ DATE ET HEURE CONFIRMÉES : samedi 24 octobre 2026, 14h30.
 
      Ne touchez pas au "+02:00" de fin de ligne : l'heure d'été court jusqu'au
      25 octobre 2026, le 24 tombe donc juste avant le changement.
      -------------------------------------------------------------------- */
-  dateISO: "2026-10-24T11:00:00+02:00",   // samedi 24 octobre 2026 — seule l'heure reste provisoire
+  dateISO: "2026-10-24T14:30:00+02:00",   // samedi 24 octobre 2026, 14h30
   dateAffichee: "",                       // auto → « samedi 24 octobre 2026 »
 
-  dateNote: "La date est confirmée. Seule l'heure de la cérémonie nous " +
-            "manque encore : la mairie nous la communique le 29 septembre, " +
-            "et nous vous la transmettons aussitôt.",
+  dateNote: "",   // plus rien n'est en attente : date et heure sont fermes
 
   surTitre: "Notre cérémonie civile",
 
@@ -68,9 +59,9 @@ window.MARIAGE_CONFIG = {
   lieu: {
     nom: "Hôtel de Ville de L'Haÿ-les-Roses",
     adresse: "41 rue Jean Jaurès, 94240 L'Haÿ-les-Roses",
-    heureArrivee: "Merci d'être devant la mairie 15 minutes avant le début " +
-                  "de la cérémonie : les cortèges en retard sont reportés " +
-                  "après les autres mariages du jour.",
+    heureArrivee: "Merci d'être devant la mairie à 14h15, soit 15 minutes " +
+                  "avant le début de la cérémonie (14h30) : les cortèges " +
+                  "en retard sont reportés après les autres mariages du jour.",
     // ⚠️ Ne PAS faire précéder l'adresse de « Hôtel de Ville » : ce nom est
     // générique (chaque commune de France en a un), et le moteur de carte
     // sans clé ne sait alors pas lequel choisir — il affiche le monde entier
@@ -89,21 +80,20 @@ window.MARIAGE_CONFIG = {
   },
 
   /* --- 5. DÉROULEMENT -------------------------------------------------
-     Tant que la mairie n'a pas donné l'heure (le 29 septembre), la timeline
-     est écrite en repères relatifs : elle reste juste quelle que soit
-     l'heure retenue. Vous pourrez ensuite remplacer « −15 min » et
-     « L'heure dite » par de vrais horaires — ou les laisser, ils se
-     défendent très bien.
+     Horaires réels, confirmés. Le creux entre 15h30 et 20h n'est pas un
+     oubli : c'est le temps de la séance photo du couple, et les invités
+     sont libres jusqu'au dîner. L'étape "Place à la séance photo" existe
+     pour que ce blanc dans la journée soit expliqué, pas juste constaté.
      -------------------------------------------------------------------- */
   programme: [
-    { heure: "−15 min", titre: "Rendez-vous devant la mairie",
+    { heure: "14h15", titre: "Rendez-vous devant la mairie",
       texte: "41 rue Jean Jaurès. La salle des mariages accueille 80 personnes assises." },
-    { heure: "L'heure dite", titre: "La cérémonie",
-      texte: "Lecture des textes, discours de l'officier d'état civil, échange des consentements. Une trentaine de minutes, dans le calme." },
-    { heure: "Juste après", titre: "Sortie et photos",
-      texte: "Nous libérons la salle pour le mariage suivant. Photos dehors, devant l'Hôtel de ville." },
-    { heure: "Ensuite", titre: "Tous à table",
-      texte: "Direction Puteaux : nous prolongeons la journée à Maison Olivine, 42 rue Jean Jaurès. Signalez vos allergies dans le formulaire, nous transmettrons." }
+    { heure: "14h30", titre: "La cérémonie",
+      texte: "Lecture des textes, discours de l'officier d'état civil, échange des consentements. Jusqu'à 15h30 environ, dans le calme." },
+    { heure: "15h30", titre: "Place à la séance photo",
+      texte: "Nous partons avec notre photographe pour quelques heures. Vous êtes libres jusqu'au dîner — de quoi souffler, ou prendre la route vers Puteaux sans se presser." },
+    { heure: "20h00", titre: "Tous à table",
+      texte: "Nous vous retrouvons à Maison Olivine, 42 rue Jean Jaurès, 92800 Puteaux. Signalez vos allergies dans le formulaire, nous transmettrons." }
   ],
 
   /* --- 6. GALERIE ------------------------------------------------------ */
@@ -174,10 +164,11 @@ window.MARIAGE_CONFIG = {
       // restaurant sont tous deux rue Jean Jaurès — mais pas dans la même
       // ville (94240 L'Haÿ-les-Roses / 92800 Puteaux). D'où la précision du
       // numéro et de la ville à chaque mention, pour ne jamais confondre.
-      texte: "Le repas se tient à Maison Olivine, 42 rue Jean Jaurès, " +
+      texte: "Rendez-vous à 20h à Maison Olivine, 42 rue Jean Jaurès, " +
              "92800 Puteaux. Puteaux est de l'autre côté de Paris par " +
              "rapport à L'Haÿ-les-Roses : prévoyez une bonne marge sur le " +
-             "trajet. Si vous êtes en voiture, proposez une place — et si " +
+             "trajet, surtout si vous quittez la mairie en même temps que " +
+             "nous. Si vous êtes en voiture, proposez une place — et si " +
              "vous n'en avez pas, dites-le nous, on s'arrange.",
       lienTexte: "Itinéraire vers le restaurant",
       lienUrl: "https://www.google.com/maps/dir/?api=1&origin=41+rue+Jean+Jaur%C3%A8s%2C+94240+L%27Ha%C3%BF-les-Roses&destination=42+rue+Jean+Jaur%C3%A8s%2C+92800+Puteaux"
