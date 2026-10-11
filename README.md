@@ -66,10 +66,10 @@ le changement. (Se tromper d'une heure n'aurait d'ailleurs aucune
 conséquence visible.)
 
 Le déroulement de la journée porte les vrais horaires, creux compris : la
-mairie libère la salle à 15h30, le dîner commence à 20h, et l'étape « Place
-à la séance photo » explique ce qui occupe les quatre heures entre les deux
-— les invités sont libres durant ce temps, ce n'est pas un oubli du
-programme.
+mairie libère la salle à 15h30, le dîner commence à 19h30, et l'étape
+« Place à la séance photo » explique ce qui occupe les quatre heures entre
+les deux — les invités sont libres durant ce temps, ce n'est pas un oubli
+du programme.
 
 **Une valeur laissée vide masque proprement l'élément concerné.** Le site reste
 présentable même à moitié rempli : rien n'affiche « undefined », aucune image

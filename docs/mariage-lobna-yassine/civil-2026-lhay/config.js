@@ -80,7 +80,7 @@ window.MARIAGE_CONFIG = {
   },
 
   /* --- 5. DÉROULEMENT -------------------------------------------------
-     Horaires réels, confirmés. Le creux entre 15h30 et 20h n'est pas un
+     Horaires réels, confirmés. Le creux entre 15h30 et 19h30 n'est pas un
      oubli : c'est le temps de la séance photo du couple, et les invités
      sont libres jusqu'au dîner. L'étape "Place à la séance photo" existe
      pour que ce blanc dans la journée soit expliqué, pas juste constaté.
@@ -92,7 +92,7 @@ window.MARIAGE_CONFIG = {
       texte: "Lecture des textes, discours de l'officier d'état civil, échange des consentements. Jusqu'à 15h30 environ, dans le calme." },
     { heure: "15h30", titre: "Place à la séance photo",
       texte: "Nous partons avec notre photographe pour quelques heures. Vous êtes libres jusqu'au dîner — de quoi souffler, ou prendre la route vers Puteaux sans se presser." },
-    { heure: "20h00", titre: "Tous à table",
+    { heure: "19h30", titre: "Tous à table",
       texte: "Nous vous retrouvons à Maison Olivine, 42 rue Jean Jaurès, 92800 Puteaux. Signalez vos allergies dans le formulaire, nous transmettrons." }
   ],
 
@@ -164,7 +164,7 @@ window.MARIAGE_CONFIG = {
       // restaurant sont tous deux rue Jean Jaurès — mais pas dans la même
       // ville (94240 L'Haÿ-les-Roses / 92800 Puteaux). D'où la précision du
       // numéro et de la ville à chaque mention, pour ne jamais confondre.
-      texte: "Rendez-vous à 20h à Maison Olivine, 42 rue Jean Jaurès, " +
+      texte: "Rendez-vous à 19h30 à Maison Olivine, 42 rue Jean Jaurès, " +
              "92800 Puteaux. Puteaux est de l'autre côté de Paris par " +
              "rapport à L'Haÿ-les-Roses : prévoyez une bonne marge sur le " +
              "trajet, surtout si vous quittez la mairie en même temps que " +
