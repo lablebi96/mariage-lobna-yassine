@@ -1,0 +1,18 @@
+/* ==========================================================================
+   effets-festifs.css — PAGE CIVILE UNIQUEMENT
+   --------------------------------------------------------------------------
+   Positionne le canvas des effets festifs exactement comme .hero__fond et
+   .hero__voile (position: absolute; inset: 0), juste au-dessus du voile et
+   en dessous du texte, dans l'ordre du HTML.
+
+   Fichier chargé UNIQUEMENT par cette page : style.css, partagé avec la
+   page publique (Tunisie), n'est pas touché.
+   ========================================================================== */
+
+.hero__festif {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  display: block;
+  pointer-events: none;   /* purement décoratif : ne doit jamais gêner un clic */
+  transition: opacity .6s ease;   /* le fondu entre étincelles et feu d'artifice */
+}

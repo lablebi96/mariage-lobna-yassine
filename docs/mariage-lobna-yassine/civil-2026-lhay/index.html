@@ -24,6 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="effets-festifs.css">
 </head>
 <body>
 
@@ -37,6 +38,11 @@
     <img id="hero-photo" alt="" decoding="async" fetchpriority="high" hidden>
   </div>
   <div class="hero__voile" aria-hidden="true"></div>
+
+  <!-- Habillage festif (validé en maquette) : étincelles et feu d'artifice
+       alternent en fondu, chacun sur son calque. Civile uniquement. -->
+  <canvas class="hero__festif" id="hero-festif-etincelles" aria-hidden="true"></canvas>
+  <canvas class="hero__festif" id="hero-festif-feu" aria-hidden="true"></canvas>
 
   <div class="hero__contenu">
     <p class="hero__sur-titre" id="hero-sur-titre">Nous nous marions</p>
@@ -217,5 +223,6 @@
 
 <script src="config.js"></script>
 <script src="../js/main.js"></script>
+<script src="effets-festifs.js"></script>
 </body>
 </html>

@@ -251,8 +251,10 @@ redémarrer de ce côté.
         ├── js/main.js         la logique (partagée : compte à rebours, galerie, RSVP)
         ├── images/            vos photos (servent aux deux pages)
         └── civil-2026-lhay/
-            ├── index.html     PAGE DES PROCHES — la mairie
-            └── config.js      ← le fichier de la page des proches
+            ├── index.html             PAGE DES PROCHES — la mairie
+            ├── config.js              ← le fichier de la page des proches
+            ├── effets-festifs.js      scintillement + feu d'artifice du hero
+            └── effets-festifs.css     leur positionnement et leur fondu
 ```
 
 **Une seule logique pour deux pages.** `main.js` et `style.css` ne sont écrits
@@ -276,6 +278,35 @@ sed -e 's|href="css/|href="../css/|' \
 
 Pensez ensuite à remettre le `<title>` et les métadonnées de partage de la
 page civile.
+
+> ⚠️ Cette commande régénère la page civile **à partir de la page
+> publique**, qui n'a pas l'habillage festif décrit juste en dessous. Une
+> régénération effacerait donc silencieusement les deux `<canvas>` du hero
+> et les deux lignes qui chargent `effets-festifs.css`/`.js`. Si vous
+> régénérez après ce jour, rajoutez-les à la main (ou recopiez-les depuis
+> une sauvegarde du fichier).
+
+### L'habillage festif du hero (page civile uniquement)
+
+Un scintillement doré tourne en continu dans le hero, et cède la place par
+intermittence à un feu d'artifice, en fondu — jamais les deux en même
+temps. Choisi parmi plusieurs pistes comparées sur une maquette avant
+d'écrire la moindre ligne de ce fichier.
+
+Deux fichiers, chargés uniquement par `civil-2026-lhay/index.html` :
+`effets-festifs.js` (le dessin, en canvas) et `effets-festifs.css` (leur
+position dans le hero et le fondu entre les deux). `main.js` et
+`css/style.css`, partagés avec la page publique, n'y touchent pas — la
+page de Tunisie n'affiche jamais ça.
+
+**Pour le retirer** : supprimez les deux lignes qui chargent ces fichiers
+(`<link>` dans le `<head>`, `<script>` en bas de page) et les deux
+`<canvas class="hero__festif">` du hero, dans `civil-2026-lhay/index.html`.
+Rien d'autre à toucher.
+
+Respecte la préférence système « mouvement réduit » (un rendu fixe plutôt
+qu'animé) et se met en pause dès que l'onglet est caché ou que le hero est
+scrollé hors de l'écran.
 
 **Pourquoi `docs/` et pas `public/` ?** GitHub Pages n'accepte que deux
 racines : celle du dépôt, ou `docs/`. Ce nom permet donc de publier sans
