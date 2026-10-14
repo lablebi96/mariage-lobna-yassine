@@ -22,12 +22,12 @@ window.MARIAGE_CONFIG = {
   },
 
   /* --- 2. LA DATE ----------------------------------------------------
-     ✅ DATE ET HEURE CONFIRMÉES : samedi 24 octobre 2026, 14h30.
+     ✅ DATE ET HEURE CONFIRMÉES : samedi 24 octobre 2026, 14h15.
 
      Ne touchez pas au "+02:00" de fin de ligne : l'heure d'été court jusqu'au
      25 octobre 2026, le 24 tombe donc juste avant le changement.
      -------------------------------------------------------------------- */
-  dateISO: "2026-10-24T14:30:00+02:00",   // samedi 24 octobre 2026, 14h30
+  dateISO: "2026-10-24T14:15:00+02:00",   // samedi 24 octobre 2026, 14h15
   dateAffichee: "",                       // auto → « samedi 24 octobre 2026 »
 
   dateNote: "",   // plus rien n'est en attente : date et heure sont fermes
@@ -59,8 +59,8 @@ window.MARIAGE_CONFIG = {
   lieu: {
     nom: "Hôtel de Ville de L'Haÿ-les-Roses",
     adresse: "41 rue Jean Jaurès, 94240 L'Haÿ-les-Roses",
-    heureArrivee: "Merci d'être devant la mairie à 14h15, soit 15 minutes " +
-                  "avant le début de la cérémonie (14h30) : les cortèges " +
+    heureArrivee: "Merci d'être devant la mairie à 14h, soit 15 minutes " +
+                  "avant le début de la cérémonie (14h15) : les cortèges " +
                   "en retard sont reportés après les autres mariages du jour.",
     // ⚠️ Ne PAS faire précéder l'adresse de « Hôtel de Ville » : ce nom est
     // générique (chaque commune de France en a un), et le moteur de carte
@@ -80,17 +80,17 @@ window.MARIAGE_CONFIG = {
   },
 
   /* --- 5. DÉROULEMENT -------------------------------------------------
-     Horaires réels, confirmés. Le creux entre 15h30 et 19h30 n'est pas un
+     Horaires réels, confirmés. Le creux entre 15h15 et 19h30 n'est pas un
      oubli : c'est le temps de la séance photo du couple, et les invités
      sont libres jusqu'au dîner. L'étape "Place à la séance photo" existe
      pour que ce blanc dans la journée soit expliqué, pas juste constaté.
      -------------------------------------------------------------------- */
   programme: [
-    { heure: "14h15", titre: "Rendez-vous devant la mairie",
+    { heure: "14h00", titre: "Rendez-vous devant la mairie",
       texte: "41 rue Jean Jaurès. La salle des mariages accueille 80 personnes assises." },
-    { heure: "14h30", titre: "La cérémonie",
-      texte: "Lecture des textes, discours de l'officier d'état civil, échange des consentements. Jusqu'à 15h30 environ, dans le calme." },
-    { heure: "15h30", titre: "Place à la séance photo",
+    { heure: "14h15", titre: "La cérémonie",
+      texte: "Lecture des textes, discours de l'officier d'état civil, échange des consentements. Jusqu'à 15h15 environ, dans le calme." },
+    { heure: "15h15", titre: "Place à la séance photo",
       texte: "Nous partons avec notre photographe pour quelques heures. Vous êtes libres jusqu'au dîner — de quoi souffler, ou prendre la route vers Puteaux sans se presser." },
     { heure: "19h30", titre: "Tous à table",
       texte: "Nous vous retrouvons à Maison Olivine, 42 rue Jean Jaurès, 92800 Puteaux. Signalez vos allergies dans le formulaire, nous transmettrons." }
